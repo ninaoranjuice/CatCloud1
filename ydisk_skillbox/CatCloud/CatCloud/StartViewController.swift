@@ -26,7 +26,7 @@ class StartViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .white
-        
+
         text.textColor = .blue
         text.text = "CATCLOUD"
         text.font = .boldSystemFont(ofSize: 40)
@@ -50,8 +50,8 @@ class StartViewController: UIViewController {
     }
     
     @objc private func imageTapped() {
-        let newViewController = FirstOnboarding()
-        present(newViewController, animated: true, completion: nil)
+        let onboardingViewController = OnboardingViewController()
+        present(onboardingViewController, animated: true, completion: nil)
     }
 }
 

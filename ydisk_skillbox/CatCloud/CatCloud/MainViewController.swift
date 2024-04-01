@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     let image = UIImageView(image: UIImage(named: "Logo"))
     let text = UILabel()
     let stackView = UIStackView()
+    let registrationButton = UIButton(type: .roundedRect)
     
 
     override func viewDidLoad() {
@@ -22,11 +23,15 @@ class MainViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .white
-        
-        text.textColor = .red
+
+        text.textColor = .blue
         text.text = "CATCLOUD"
-        
+        text.font = .boldSystemFont(ofSize: 40)
+
         image.contentMode = .scaleAspectFit
+        
+        registrationButton.setTitle("Зарегистрироваться", for: .normal)
+        registrationButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -35,6 +40,7 @@ class MainViewController: UIViewController {
         
         stackView.addArrangedSubview(image)
         stackView.addArrangedSubview(text)
+        stackView.addArrangedSubview(registrationButton)
         
         view.addSubview(stackView)
         
@@ -42,6 +48,10 @@ class MainViewController: UIViewController {
             make.top.equalToSuperview().inset(50)
             make.leading.trailing.equalToSuperview().inset(50)
         }
+    }
+    
+    @objc private func tapButton() {
+        
     }
 }
 
