@@ -17,6 +17,7 @@ class OnboardingViewController: UIViewController {
         OnboardingPage(image: UIImage(named: "Onboarding2"), title: "Открывай", description: "Доступ к файлам останется даже без интернета"),
         OnboardingPage(image: UIImage(named: "Onboarding3"), title: "Делись", description: "Делитесь вашими файлами с другими"),
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
@@ -42,15 +43,17 @@ class OnboardingViewController: UIViewController {
         view.addSubview(pageControl)
         
         pageControl.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
-            make.center.equalToSuperview()
         }
     }
     
     private func addPages() {
         for (index, page) in pages.enumerated() {
-            let pageView = PageView(frame: CGRect(x: view.frame.width * CGFloat(index), y: 0, width: view.frame.width, height: view.frame.height), page: page)
+            let pageView = PageView(frame: CGRect(x: scrollView.bounds.width * CGFloat(index), y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height), page: page)
             pageView.delegate = self
+            pageView.index = index
+            pageView.totalPages = pages.count
             scrollView.addSubview(pageView)
         }
     }
@@ -68,5 +71,15 @@ extension OnboardingViewController: PageViewDelegate {
         let nextPage = min(pageControl.currentPage + 1, pages.count - 1)
         let xOffset = CGFloat(nextPage) * scrollView.bounds.width
         scrollView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+    }
+    
+    func closeTapped() {
+    sleep(1)
+       let mainViewController = MainViewController()
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = mainViewController
+        }
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

@@ -10,13 +10,17 @@ import SnapKit
 
 protocol PageViewDelegate: AnyObject {
     func buttonTapped()
+    func closeTapped()
 }
 
 class PageView: UIView {
-    private let imageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let descriptionLabel = UILabel()
-    private let nextButton = UIButton(type: .roundedRect)
+    let imageView = UIImageView()
+    let titleLabel = UILabel()
+    let descriptionLabel = UILabel()
+    let nextButton = UIButton(type: .roundedRect)
+    let closeButton = UIButton()
+    var index: Int?
+    var totalPages: Int?
     
     weak var delegate: PageViewDelegate?
     
@@ -60,41 +64,59 @@ class PageView: UIView {
         nextButton.layer.cornerRadius = 25
         nextButton.layer.masksToBounds = true
         addSubview(nextButton)
+        
+        closeButton.setImage(UIImage(named: "Exit"), for: .normal)
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+        addSubview(closeButton)
     }
+        
+    @objc private func closeTapped() {
+        delegate?.closeTapped()
+        }
     
     @objc private func buttonTapped() {
         delegate?.buttonTapped()
-    }
-    
-    private func setupConstraints() {
-        imageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(20)
-            make.width.equalTo(350)
-            make.height.equalTo(350)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView).offset(400)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-        }
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel).offset(50)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-        }
-        nextButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(descriptionLabel).offset(100)
-            make.width.equalTo(200)
-            make.height.equalTo(50)
+        if let index = index, let totalPages = totalPages, index == totalPages - 1 {
+            delegate?.closeTapped()
         }
     }
     
-    private func configure(with page: OnboardingPage) {
+private func setupConstraints() {
+    imageView.snp.makeConstraints { make in
+        make.centerX.equalToSuperview()
+        make.top.equalToSuperview().offset(60)
+        make.width.equalTo(300)
+        make.height.equalTo(300)
+    }
+    titleLabel.snp.makeConstraints { make in
+        make.top.equalTo(imageView).offset(360)
+        make.leading.equalToSuperview().offset(20)
+        make.trailing.equalToSuperview().offset(-20)
+    }
+    descriptionLabel.snp.makeConstraints { make in
+        make.top.equalTo(titleLabel).offset(60)
+        make.leading.equalToSuperview().offset(20)
+        make.trailing.equalToSuperview().offset(-20)
+    }
+    nextButton.snp.makeConstraints { make in
+        make.leading.equalToSuperview().offset(20)
+        make.trailing.equalToSuperview().offset(-20)
+        make.top.equalTo(descriptionLabel).offset(120)
+        make.width.equalTo(180)
+        make.height.equalTo(60)
+    }
+    
+    closeButton.snp.makeConstraints { make in
+        make.top.equalToSuperview().offset(60)
+        make.trailing.equalToSuperview().offset(-20)
+        make.width.height.equalTo(50)
+    }
+}
+    
+     func configure(with page: OnboardingPage) {
         imageView.image = page.image
         titleLabel.text = page.title
         descriptionLabel.text = page.description
     }
 }
+
