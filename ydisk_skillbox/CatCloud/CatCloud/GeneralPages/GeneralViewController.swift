@@ -1,14 +1,14 @@
 //
-//  MainViewController.swift
+//  GeneralViewController.swift
 //  CatCloud
 //
-//  Created by Нина Гурстиева on 29.03.2024.
+//  Created by Нина Гурстиева on 03.04.2024.
 //
 
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController {
+class GeneralViewController: UIViewController {
     
     let image = UIImageView(image: UIImage(named: "Logo"))
     let text = UILabel()
@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
 
         image.contentMode = .scaleAspectFit
         
-        registrationButton.setTitle("Зарегистрироваться", for: .normal)
+        registrationButton.setTitle("Страница с тапбаром тут", for: .normal)
         registrationButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         stackView.axis = .vertical
@@ -52,13 +52,9 @@ class MainViewController: UIViewController {
     }
     
     @objc private func register() {
-        let registration = RegistrationViewController()
-         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let window = windowScene.windows.first {
-             window.rootViewController = registration
-         }
-         presentingViewController?.dismiss(animated: true, completion: nil)
+        
      }
 }
+
 
 

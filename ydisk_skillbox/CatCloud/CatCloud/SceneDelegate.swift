@@ -14,12 +14,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
                 
-        if userDefaults.bool(forKey: "onboarding") {
+        if userDefaults.bool(forKey: "onboarding") && userDefaults.bool(forKey: "registration") {
+            window?.rootViewController = GeneralViewController()
+        }
+        else if userDefaults.bool(forKey: "onboarding") && userDefaults.bool(forKey: "registation") == false {
+            userDefaults.set(true, forKey: "registration")
             window?.rootViewController = MainViewController()
-        } else {
+        }
+        else {
             userDefaults.set(true, forKey: "onboarding")
             openOnboarding()
-            }
+        }
     }
     
     func openOnboarding() {

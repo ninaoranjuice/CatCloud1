@@ -119,4 +119,3 @@ private func setupConstraints() {
         descriptionLabel.text = page.description
     }
 }
-
