@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
 
         image.contentMode = .scaleAspectFit
         
-        registrationButton.setTitle("Зарегистрироваться", for: .normal)
+        registrationButton.setTitle("Войти", for: .normal)
         registrationButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         stackView.axis = .vertical

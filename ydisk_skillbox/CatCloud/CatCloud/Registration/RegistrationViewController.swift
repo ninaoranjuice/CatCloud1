@@ -6,57 +6,59 @@
 //
 
 import UIKit
+import WebKit
 
-class RegistrationViewController: UIViewController {
+class RegistrationViewController: UIViewController, WKNavigationDelegate {
     
-    let image = UIImageView(image: UIImage(named: "Logo"))
-    let text = UILabel()
-    let stackView = UIStackView()
-    let registrationButton = UIButton(type: .roundedRect)
-    
+    var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.modalPresentationStyle = .fullScreen
-        setUI()
-    }
-    
-    private func setUI() {
-        view.backgroundColor = .white
-
-        text.textColor = .blue
-        text.text = "CATCLOUD"
-        text.font = .boldSystemFont(ofSize: 40)
-
-        image.contentMode = .scaleAspectFit
         
-        registrationButton.setTitle("Вход выполнен.", for: .normal)
-        registrationButton.addTarget(self, action: #selector(register), for: .touchUpInside)
+        webView = WKWebView(frame: view.bounds)
+        webView.navigationDelegate = self
+        view.addSubview(webView)
         
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 30
+        let urlString = "https://oauth.yandex.ru/authorize?response_type=token&client_id=169ae726a03c42fb94e6ed799ef6061f&redirect_uri=lhttps://oauth.yandex.ru/verification_code"
         
-        stackView.addArrangedSubview(image)
-        stackView.addArrangedSubview(text)
-        stackView.addArrangedSubview(registrationButton)
-        
-        view.addSubview(stackView)
-        
-        stackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(50)
-            make.leading.trailing.equalToSuperview().inset(50)
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            webView.load(request)
         }
     }
     
-    @objc private func register() {
-        let generalPage = GeneralViewController()
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url, url.absoluteString.hasPrefix("lhttps://oauth.yandex.ru/verification_code") {
+            let token = extractToken(from: url)
+            print("Токен доступа: \(String(describing: token))")
+            TokenManager.shared.accessToken = token
+            register()
+            decisionHandler(.cancel)
+            return
+        }
+        decisionHandler(.allow)
+    }
+    
+    func extractToken(from url: URL) -> String? {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else {
+            return nil
+        }
+        for queryItem in queryItems {
+            if queryItem.name == "access_token" {
+                return queryItem.value
+            }
+        }
+        return nil
+    }
+    
+  private func register() {
+        let generalPage = TapBarController()
          if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
             let window = windowScene.windows.first {
              window.rootViewController = generalPage
          }
-         presentingViewController?.dismiss(animated: true, completion: nil)
+      //   presentingViewController?.dismiss(animated: true, completion: nil)
      }
 }
 
