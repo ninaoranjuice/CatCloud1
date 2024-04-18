@@ -19,8 +19,10 @@
 		2C5BB89E2BD0581E00F767D1 /* LastFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB89D2BD0581E00F767D1 /* LastFilesViewController.swift */; };
 		2C5BB8A02BD0583C00F767D1 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB89F2BD0583C00F767D1 /* AllFilesViewController.swift */; };
 		2C5BB8A22BD058EA00F767D1 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB8A12BD058EA00F767D1 /* TapBarController.swift */; };
-		2C5BB8A42BD05FC200F767D1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB8A32BD05FC200F767D1 /* Request.swift */; };
 		2C5BB8A62BD0692700F767D1 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB8A52BD0692700F767D1 /* TokenManager.swift */; };
+		2CA28E292BD15D2D004DC585 /* LastFilesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA28E282BD15D2D004DC585 /* LastFilesRequests.swift */; };
+		2CA28E2D2BD15E63004DC585 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA28E2C2BD15E63004DC585 /* Loader.swift */; };
+		2CA28E302BD1664A004DC585 /* LastFilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA28E2F2BD1664A004DC585 /* LastFilesModel.swift */; };
 		2CFBA2AC2BBCA25A00C43A48 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */; };
 		2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */; };
 		A8582708AFE13DBEFAFB3BC1 /* Pods_CatCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DA9DC913709ECF99493F77 /* Pods_CatCloud.framework */; };
@@ -41,8 +43,10 @@
 		2C5BB89D2BD0581E00F767D1 /* LastFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesViewController.swift; sourceTree = "<group>"; };
 		2C5BB89F2BD0583C00F767D1 /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
 		2C5BB8A12BD058EA00F767D1 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
-		2C5BB8A32BD05FC200F767D1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		2C5BB8A52BD0692700F767D1 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		2CA28E282BD15D2D004DC585 /* LastFilesRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesRequests.swift; sourceTree = "<group>"; };
+		2CA28E2C2BD15E63004DC585 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		2CA28E2F2BD1664A004DC585 /* LastFilesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesModel.swift; sourceTree = "<group>"; };
 		2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75C16E25858ED5D7CACE5D8F /* Pods-CatCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatCloud.debug.xcconfig"; path = "Target Support Files/Pods-CatCloud/Pods-CatCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				2C11610A2BB5DE240080215C /* Assets.xcassets */,
 				2C11610C2BB5DE240080215C /* LaunchScreen.storyboard */,
 				2C11610F2BB5DE240080215C /* Info.plist */,
+				2CA28E2E2BD15E68004DC585 /* Elements */,
 			);
 			path = CatCloud;
 			sourceTree = "<group>";
@@ -107,11 +112,28 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		2CA28E272BD15D0B004DC585 /* LastFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2C5BB89D2BD0581E00F767D1 /* LastFilesViewController.swift */,
+				2CA28E282BD15D2D004DC585 /* LastFilesRequests.swift */,
+				2CA28E2F2BD1664A004DC585 /* LastFilesModel.swift */,
+			);
+			path = LastFiles;
+			sourceTree = "<group>";
+		};
+		2CA28E2E2BD15E68004DC585 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				2CA28E2C2BD15E63004DC585 /* Loader.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		2CFBA2AE2BBCB2B100C43A48 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
 				2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */,
-				2C5BB8A32BD05FC200F767D1 /* Request.swift */,
 				2C5BB8A52BD0692700F767D1 /* TokenManager.swift */,
 			);
 			path = Registration;
@@ -121,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */,
-				2C5BB89D2BD0581E00F767D1 /* LastFilesViewController.swift */,
+				2CA28E272BD15D0B004DC585 /* LastFiles */,
 				2C5BB89F2BD0583C00F767D1 /* AllFilesViewController.swift */,
 				2C5BB8A12BD058EA00F767D1 /* TapBarController.swift */,
 			);
@@ -261,17 +283,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C11611F2BB71DF40080215C /* MainViewController.swift in Sources */,
-				2C5BB8A42BD05FC200F767D1 /* Request.swift in Sources */,
 				2CFBA2AC2BBCA25A00C43A48 /* RegistrationViewController.swift in Sources */,
 				2C1161292BBAFECC0080215C /* OnboardingViewController.swift in Sources */,
 				2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */,
+				2CA28E292BD15D2D004DC585 /* LastFilesRequests.swift in Sources */,
 				2C1161022BB5DE230080215C /* AppDelegate.swift in Sources */,
+				2CA28E302BD1664A004DC585 /* LastFilesModel.swift in Sources */,
 				2C11612D2BBB04890080215C /* PageView.swift in Sources */,
 				2C5BB89E2BD0581E00F767D1 /* LastFilesViewController.swift in Sources */,
 				2C5BB8A62BD0692700F767D1 /* TokenManager.swift in Sources */,
 				2C5BB8A22BD058EA00F767D1 /* TapBarController.swift in Sources */,
 				2C11612B2BBB044F0080215C /* OnboardingModel.swift in Sources */,
 				2C5BB8A02BD0583C00F767D1 /* AllFilesViewController.swift in Sources */,
+				2CA28E2D2BD15E63004DC585 /* Loader.swift in Sources */,
 				2C1161042BB5DE230080215C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

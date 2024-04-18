@@ -19,7 +19,7 @@ class RegistrationViewController: UIViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         view.addSubview(webView)
         
-        let urlString = "https://oauth.yandex.ru/authorize?response_type=token&client_id=169ae726a03c42fb94e6ed799ef6061f&redirect_uri=lhttps://oauth.yandex.ru/verification_code"
+        let urlString = "https://oauth.yandex.ru/authorize?response_type=token&client_id=776e88da6f194321921ae5c972e5a206&redirect_uri=https://oauth.yandex.ru/verification_code"
         
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)
@@ -28,25 +28,35 @@ class RegistrationViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.absoluteString.hasPrefix("lhttps://oauth.yandex.ru/verification_code") {
-            let token = extractToken(from: url)
-            print("Токен доступа: \(String(describing: token))")
-            TokenManager.shared.accessToken = token
-            register()
-            decisionHandler(.cancel)
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.allow)
             return
         }
-        decisionHandler(.allow)
+        print("URL: \(url.absoluteString)")
+        
+        if url.absoluteString.hasPrefix("https://oauth.yandex.ru/verification_code") {
+            if let token = extractToken(from: url) {
+                print("Токен доступа: \(token)")
+                TokenManager.shared.accessToken = token
+                register()
+            } else {
+                print("Не удалось извлечь токен доступа из URL.")
+            }
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
     }
     
     func extractToken(from url: URL) -> String? {
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let queryItems = components.queryItems else {
+        guard let fragment = url.fragment else {
             return nil
         }
-        for queryItem in queryItems {
-            if queryItem.name == "access_token" {
-                return queryItem.value
+        let components = fragment.components(separatedBy: "&")
+        for component in components {
+            let keyValue = component.components(separatedBy: "=")
+            if keyValue.count == 2, keyValue[0] == "access_token" {
+                return keyValue[1]
             }
         }
         return nil
@@ -58,7 +68,6 @@ class RegistrationViewController: UIViewController, WKNavigationDelegate {
             let window = windowScene.windows.first {
              window.rootViewController = generalPage
          }
-      //   presentingViewController?.dismiss(animated: true, completion: nil)
      }
 }
 
