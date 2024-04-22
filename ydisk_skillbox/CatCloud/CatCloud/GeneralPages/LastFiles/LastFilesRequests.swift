@@ -13,11 +13,11 @@ class LastFilesRequests {
         let urlString = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded"
         
         let parameters: [String: Any] = [
-            "limit": "15",
+            "limit": "10",
             "media_type": "document,image,text,spreadsheet",
-            "fields": "\"preview, name, created, size\"",
-            "preview_size": "240",
-            "preview_crop": "false"
+            "fields": "preview, name, created, size",
+            "preview_size": "M",
+            "preview_crop": "true"
         ]
         
         var urlComponents = URLComponents(string: urlString)!
@@ -33,6 +33,7 @@ class LastFilesRequests {
         
         if let accessToken = TokenManager.shared.accessToken {
             request.setValue("OAuth \(accessToken)", forHTTPHeaderField: "Authorization")
+        
             print("Токен доступа успешно добавлен к запросу.")
             print("Токен, который добавили: \(accessToken)")
         } else {

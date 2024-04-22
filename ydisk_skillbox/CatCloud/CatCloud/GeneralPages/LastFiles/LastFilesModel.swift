@@ -9,7 +9,8 @@ struct Information: Codable {
     let name: String
     let created: String
     let size: Int
-    let preview: String
+    let preview: String?
+    let mime_type: String
 }
 
 struct LastUploadFilesResponse: Codable {
