@@ -1,24 +1,27 @@
 //
-//  Requests.swift
+//  AllFilesRequests.swift
 //  CatCloud
 //
-//  Created by Нина Гурстиева on 18.04.2024.
+//  Created by Нина Гурстиева on 26.04.2024.
 //
 
 import Foundation
 import UIKit
 
-class LastFilesRequests {
-    func loadLastFiles(for viewController: LastFilesViewController) {
+class AllFilesRequests {
+    func loadAllFiles(for viewController: AllFilesViewController, offset: Int) {
         
-        let urlString = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded"
+        let urlString = "https://cloud-api.yandex.net/v1/disk/resources/files"
         
         let parameters: [String: Any] = [
             "limit": "10",
+            "offset": "\(offset)",
+            "path": "",
             "media_type": "document, image, text, spreadsheet",
             "fields": "preview, name, created, size",
             "preview_size": "M",
-            "preview_crop": "true"
+            "preview_crop": "true",
+            "sort": "name"
         ]
         
         var urlComponents = URLComponents(string: urlString)!
@@ -62,7 +65,7 @@ class LastFilesRequests {
             if let data = data {
                 do {
                     let decoder = JSONDecoder()
-                    let result = try decoder.decode(LastUploadFilesResponse.self, from: data)
+                    let result = try decoder.decode(AllLoadFilesResponse.self, from: data)
                     DispatchQueue.main.async {
                         viewController.updateData(result.items)
                     }

@@ -1,11 +1,11 @@
 //
-//  LastFilesModel.swift
+//  AllFilesModel.swift
 //  CatCloud
 //
-//  Created by Нина Гурстиева on 18.04.2024.
+//  Created by Нина Гурстиева on 26.04.2024.
 //
 
-struct Information: Codable {
+struct Info: Codable {
     let name: String
     let created: String
     let size: Int
@@ -14,8 +14,10 @@ struct Information: Codable {
     let path: String
     let file: String?
     let href: String?
+
 }
 
-struct LastUploadFilesResponse: Codable {
-    let items: [Information]
+struct AllLoadFilesResponse: Codable {
+    let items: [Info]
 }
+

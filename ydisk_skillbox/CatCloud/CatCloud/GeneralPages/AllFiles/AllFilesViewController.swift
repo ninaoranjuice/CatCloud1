@@ -1,5 +1,5 @@
 //
-//  LastFilesViewController.swift
+//  AllFilesViewController.swift
 //  CatCloud
 //
 //  Created by Нина Гурстиева on 17.04.2024.
@@ -9,23 +9,24 @@ import UIKit
 import SnapKit
 import AlamofireImage
 
-class LastFilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class AllFilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     var tableView = UITableView()
-    var request = LastFilesRequests()
-    var information = [Information]()
+    var request = AllFilesRequests()
+    var information = [Info]()
+    var loadButton = UIButton(type: .infoLight)
+    var offset = 0
     var refreshControl = UIRefreshControl()
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
         title = "Последние файлы"
         setUI()
-        loadPage()
+        loadPage(offset: offset)
     }
-    
+
     private func setUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
@@ -33,16 +34,25 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
+        tableView.tableFooterView = loadButton
+        loadButton.setTitle("Загрузить еще", for: .normal)
+        loadButton.addTarget(self, action: #selector(loadButtonTapped), for: .touchUpInside)
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    private func loadPage() {
-        request.loadLastFiles(for: self)
+    private func loadPage(offset: Int) {
+        request.loadAllFiles(for: self, offset: offset)
     }
     
-    func updateData(_ informationArray: [Information]) {
+    @objc func loadButtonTapped() {
+        self.offset += 10
+        loadPage(offset: self.offset)
+    }
+    
+    func updateData(_ informationArray: [Info]) {
         information.append(contentsOf: informationArray)
        DispatchQueue.main.async {
         self.tableView.reloadData()
@@ -52,7 +62,7 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func refreshData() {
         information.removeAll()
-        loadPage()
+        loadPage(offset: 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,4 +123,5 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
         present(detailViewController, animated: true, completion: nil)
     }
 }
+
 

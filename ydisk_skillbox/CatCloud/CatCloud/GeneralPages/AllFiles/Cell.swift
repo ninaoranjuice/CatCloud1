@@ -14,6 +14,7 @@ class CustomCell: UITableViewCell {
     var previewImage = UIImageView()
     var createdLabel = UILabel()
     var sizeLabel = UILabel()
+    let loader = Loader(style: .large)
     
     let cell = "Cell"
     
@@ -24,8 +25,13 @@ class CustomCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(createdLabel)
         contentView.addSubview(sizeLabel)
+        loader.hidesWhenStopped = true
+        contentView.addSubview(loader)
         
-        
+        loader.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalTo(previewImage).offset(10)
+        }
         
         previewImage.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview()
