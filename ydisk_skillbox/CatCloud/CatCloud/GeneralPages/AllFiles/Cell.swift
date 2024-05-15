@@ -28,6 +28,10 @@ class CustomCell: UITableViewCell {
         loader.hidesWhenStopped = true
         contentView.addSubview(loader)
         
+        nameLabel.font = UIFont(name: "abosanova", size: 20)
+        createdLabel.font = UIFont(name: "abosanova", size: 20)
+        sizeLabel.font = UIFont(name: "abosanova", size: 20)
+        
         loader.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.centerX.equalTo(previewImage).offset(10)

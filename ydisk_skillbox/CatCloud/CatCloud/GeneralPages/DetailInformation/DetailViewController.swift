@@ -45,9 +45,9 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .systemGray
         
         nameLabel.text = "Название файла: "
-        nameLabel.font = UIFont(name: "IBMPlexSans-Bold", size: 24)
+        nameLabel.font = UIFont(name: "abosanovabold", size: 24)
         dateLabel.text = "Создан: "
-        dateLabel.font = UIFont(name: "IBMPlexSans-Bold", size: 24)
+        dateLabel.font = UIFont(name: "abosanova", size: 24)
 
         sendButton.setImage(UIImage(named: "send"), for: .normal)
         shareButton.setImage(UIImage(named: "share"), for: .normal)
