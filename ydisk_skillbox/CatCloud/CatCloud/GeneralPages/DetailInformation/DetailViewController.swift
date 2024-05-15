@@ -17,7 +17,8 @@ class DetailViewController: UIViewController {
     
     var request = DetailViewRequest()
     var information: Detail?
-    
+    var onDeleteCompletion: (() -> Void)?
+
     var nameLabel = UILabel()
     var dateLabel = UILabel()
     var imageView = UIImageView()
@@ -46,6 +47,10 @@ class DetailViewController: UIViewController {
         
         nameLabel.text = "Название файла: "
         nameLabel.font = UIFont(name: "abosanovabold", size: 24)
+        nameLabel.numberOfLines = 1
+        nameLabel.lineBreakMode = .byTruncatingTail
+        nameLabel.textAlignment = .center
+        
         dateLabel.text = "Создан: "
         dateLabel.font = UIFont(name: "abosanova", size: 24)
 
@@ -62,7 +67,7 @@ class DetailViewController: UIViewController {
         sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
         shareButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
         deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
-        renameButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
+        renameButton.titleLabel?.font = UIFont.systemFont(ofSize: 28)
         
         sendButton.tintColor = .white
         shareButton.tintColor = .white
@@ -73,7 +78,6 @@ class DetailViewController: UIViewController {
         pdfView.autoScales = true
         pdfView.backgroundColor = .clear
         pdfView.alpha = 1.0
-       //pdfView.contentMode = .scaleAspectFit
         
         buttonContainer.backgroundColor = .clear
      
@@ -102,8 +106,9 @@ class DetailViewController: UIViewController {
     private func setConstraints() {
         
         nameLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
         
         dateLabel.snp.makeConstraints { make in
@@ -156,7 +161,7 @@ class DetailViewController: UIViewController {
         
         renameButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
-            make.top.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(35)
         }
         
     }
@@ -265,8 +270,38 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @objc func tapSendButton() {}
-    @objc func tapShareButton() {}
-    @objc func tapDeleteButton() {}
-    @objc func tapRenameButton() {}
+    @objc func tapSendButton() {
+    }
+    
+    @objc func tapShareButton() {
+        
+    }
+    
+    @objc func tapDeleteButton() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы собираетесь удалить файл.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Oк", style: .default) { [weak self] _ in
+            self?.request.deleteFile(detail: self!.information!)
+            let secondAlertController = UIAlertController(title: "Успешно.", message: "Файл был успешно удален.", preferredStyle: .alert)
+            let okActionSecond = UIAlertAction(title: "OK", style: .default) { _ in
+                DispatchQueue.main.async {
+                    self?.onDeleteCompletion?()
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }
+            secondAlertController.addAction(okActionSecond)
+            DispatchQueue.main.async {
+            self?.present(secondAlertController, animated: true, completion: nil)
+            }
+        }
+        alertController.addAction(okAction)
+        let noAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alertController.addAction(noAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func tapRenameButton() {
+        
+    }
 }

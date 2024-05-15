@@ -18,11 +18,13 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
     var offset = 0
     var refreshControl = UIRefreshControl()
     
+    var onDeleteCompletion: (() -> Void)?
+
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
-        title = "Последние файлы"
+        title = "Все файлы"
         setUI()
         loadPage(offset: offset)
     }
@@ -119,6 +121,12 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
         let selectedDetail = Detail(name: selectedFile.name, created: selectedFile.created, mime_type: selectedFile.mime_type, path: selectedFile.path, file: selectedFile.file, href: selectedFile.href)
     let detailViewController = DetailViewController()
         detailViewController.information = selectedDetail
+        detailViewController.onDeleteCompletion = { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshData()
+                self?.tableView.reloadData()
+            }
+        }
         print("ПОЛУЧИЛОСЬ СДЕЛАТЬ ЗАПРОС.")
         present(detailViewController, animated: true, completion: nil)
     }

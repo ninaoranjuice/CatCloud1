@@ -15,6 +15,8 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
     var request = LastFilesRequests()
     var information = [Information]()
     var refreshControl = UIRefreshControl()
+    
+    var onDeleteCompletion: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +111,11 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
         let selectedDetail = Detail(name: selectedFile.name, created: selectedFile.created, mime_type: selectedFile.mime_type, path: selectedFile.path, file: selectedFile.file, href: selectedFile.href)
     let detailViewController = DetailViewController()
         detailViewController.information = selectedDetail
+        detailViewController.onDeleteCompletion = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
         print("ПОЛУЧИЛОСЬ СДЕЛАТЬ ЗАПРОС.")
         present(detailViewController, animated: true, completion: nil)
     }

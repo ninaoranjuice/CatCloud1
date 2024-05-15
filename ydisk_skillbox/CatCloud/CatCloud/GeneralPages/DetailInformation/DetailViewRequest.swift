@@ -12,6 +12,42 @@ import WebKit
 import Alamofire
 
 class DetailViewRequest {
+    
+    func deleteFile(detail: Detail) {
+        
+        guard let accessToken = TokenManager.shared.accessToken else {
+            print ("Есть проблемы с авторизацией.")
+            return
+        }
+        
+        let path = detail.path
+        let baseUrlString = "https://cloud-api.yandex.net/v1/disk/resources?path=\(path)"
+        print("ссылка на удаление: \(baseUrlString)")
+        let headers: HTTPHeaders = ["Authorization": "OAuth \(accessToken)"]
+        let permanently = "true"
+        
+        AF.request(baseUrlString, method: .delete, parameters: ["permanently" : permanently], headers: headers ).responseData { response in
+            switch response.result {
+            case .success (let data):
+                if let httpResponse = response.response {
+                    if httpResponse.statusCode == 204 {
+                        print("Удалось удалить файл.")
+                    } else {
+                        if let responseData = String(data: data, encoding: .utf8) {
+                            print("Ошибка \(responseData)")
+                        } else {
+                            print("Ошибка. Не удалось получить данные с сервера.")
+                        }
+                    }
+                } else {
+                    print("Ошибка. Не удалось получить ответ сервера.")
+                }
+            case .failure(let error):
+                print("Не удалось удалить файл, ошибка \(error.localizedDescription)")
+                        }
+                    }
+                }
+    
     func loadDetailInformation(for file: Detail, completion: @escaping (Result<(Detail, Data), Error>) -> Void) {
         
         guard let accessToken = TokenManager.shared.accessToken else {
