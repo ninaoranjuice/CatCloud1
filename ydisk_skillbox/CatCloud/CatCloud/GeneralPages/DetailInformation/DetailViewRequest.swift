@@ -13,6 +13,52 @@ import Alamofire
 
 class DetailViewRequest {
     
+    func renameFile(detail: Detail, name: String, completion: @escaping (Bool) -> Void) {
+        guard let accessToken = TokenManager.shared.accessToken else {
+            print ("Есть проблемы с авторизацией.")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": "OAuth \(accessToken)"]
+        
+        let oldPath = detail.path
+        let urlComponents = oldPath.components(separatedBy: ".")
+        guard urlComponents.count >= 2 else {
+            print("невозможно извлечь расширение из этого файла.")
+            completion(false)
+            return
+        }
+        let type = urlComponents.last!
+        let lastIndex = oldPath.lastIndex(of: "/")!
+        var change = String(oldPath[..<lastIndex])
+        let newPath = "\(change)/\(name).\(type)"
+        let url = "https://cloud-api.yandex.net/v1/disk/resources/move?from=\(oldPath)&path=\(newPath)"
+        
+        AF.request(url, method: .post, headers: headers).response { response in
+            switch response.result {
+            case .success (let data):
+                if let httpResponse = response.response {
+                    print("Код ответа сервера: \(httpResponse.statusCode)")
+                    if httpResponse.statusCode == 201 {
+                        print("Файл успешно переименован.")
+                        completion(true)
+                    } else {
+                        if let responseData = data, let responseString = String(data: responseData, encoding: .utf8) {
+                            print("Ошибка при переименовании \(responseString)")
+                            completion(false)
+                        } else {
+                            print("Ошибка при переименовании файла.")
+                            completion(false)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Ошибка переименования файла: \(error)")
+                completion(false)
+            }
+        }
+    }
+    
     func deleteFile(detail: Detail) {
         
         guard let accessToken = TokenManager.shared.accessToken else {

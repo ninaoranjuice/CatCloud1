@@ -60,5 +60,22 @@ class SaveInfo {
             return nil
         }
     }
+    
+    func updateName(oldName: String, newName: String) {
+        let context = persistentContainer.viewContext
+        let request: NSFetchRequest<File> = File.fetchRequest()
+        request.predicate = NSPredicate(format: "name == %@", oldName)
+        
+        do {
+            let files = try context.fetch(request)
+            for file in files {
+                file.name = newName
+            }
+            try context.save()
+        }
+        catch {
+            print("\(error)")
+        }
+    }
 }
   

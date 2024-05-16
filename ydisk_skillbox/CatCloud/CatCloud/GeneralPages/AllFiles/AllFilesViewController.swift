@@ -127,6 +127,12 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
                 self?.tableView.reloadData()
             }
         }
+        detailViewController.onRenameCompletion = { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshData()
+                self?.tableView.reloadData()
+            }
+        }
         print("ПОЛУЧИЛОСЬ СДЕЛАТЬ ЗАПРОС.")
         present(detailViewController, animated: true, completion: nil)
     }

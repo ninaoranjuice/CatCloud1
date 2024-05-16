@@ -18,7 +18,9 @@ class DetailViewController: UIViewController {
     var request = DetailViewRequest()
     var information: Detail?
     var onDeleteCompletion: (() -> Void)?
-
+    var onRenameCompletion: (() -> Void)?
+    
+    
     var nameLabel = UILabel()
     var dateLabel = UILabel()
     var imageView = UIImageView()
@@ -32,7 +34,7 @@ class DetailViewController: UIViewController {
     let renameButton = UIButton(type: .system)
     
     let buttonContainer = UIView()
-     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Детальная информация"
@@ -53,7 +55,7 @@ class DetailViewController: UIViewController {
         
         dateLabel.text = "Создан: "
         dateLabel.font = UIFont(name: "abosanova", size: 24)
-
+        
         sendButton.setImage(UIImage(named: "send"), for: .normal)
         shareButton.setImage(UIImage(named: "share"), for: .normal)
         deleteButton.setImage(UIImage(named: "delete"), for: .normal)
@@ -80,7 +82,7 @@ class DetailViewController: UIViewController {
         pdfView.alpha = 1.0
         
         buttonContainer.backgroundColor = .clear
-     
+        
         buttonContainer.addSubview(shareButton)
         buttonContainer.addSubview(sendButton)
         buttonContainer.addSubview(deleteButton)
@@ -100,7 +102,7 @@ class DetailViewController: UIViewController {
         webView.isHidden = true
         buttonContainer.isHidden = true
         renameButton.isHidden = true
-
+        
     }
     
     private func setConstraints() {
@@ -144,7 +146,7 @@ class DetailViewController: UIViewController {
             make.height.equalTo(70)
         }
         
-         sendButton.snp.makeConstraints { make in
+        sendButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
             make.centerY.equalToSuperview()
         }
@@ -177,9 +179,9 @@ class DetailViewController: UIViewController {
             updateUI(with: detail)
         } else {
             DispatchQueue.main.async {
-            self.loader.isHidden = false
-            self.loader.startAnimating()
-           }
+                self.loader.isHidden = false
+                self.loader.startAnimating()
+            }
             request.loadDetailInformation(for: file) { [weak self] result in
                 switch result {
                 case .success(let (detail, data)):
@@ -290,7 +292,7 @@ class DetailViewController: UIViewController {
             }
             secondAlertController.addAction(okActionSecond)
             DispatchQueue.main.async {
-            self?.present(secondAlertController, animated: true, completion: nil)
+                self?.present(secondAlertController, animated: true, completion: nil)
             }
         }
         alertController.addAction(okAction)
@@ -302,6 +304,31 @@ class DetailViewController: UIViewController {
     }
     
     @objc func tapRenameButton() {
+        let alertController = UIAlertController(title: "Переименовать файл", message: "Введите новое имя файла", preferredStyle: .alert)
+        alertController.addTextField { text in
+            text.placeholder = "Новое имя"
+        }
+        let saveButton = UIAlertAction(title: "Сохранить", style: .default) { [weak self] _ in
+            guard let newName = alertController.textFields?.first?.text, !newName.isEmpty else {
+                print("Пользователь не ввел ничего.")
+                return
+            }
+            self?.request.renameFile(detail: (self?.information!)!, name: newName) { success in
+                if success {
+                    DispatchQueue.main.async {
+                        SaveInfo.shared.updateName(oldName: self!.information!.name, newName: newName)
+                        self?.onRenameCompletion?()
+                        self?.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    print("Возникла ошибка при переименовании файла.")
+                }
+            }
+        }
+        alertController.addAction(saveButton)
         
+        let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+        present(alertController, animated: true, completion: nil)
     }
 }
