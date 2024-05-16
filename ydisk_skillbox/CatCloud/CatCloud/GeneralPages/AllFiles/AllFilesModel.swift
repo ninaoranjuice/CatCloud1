@@ -14,6 +14,8 @@ struct Info: Codable {
     let path: String
     let file: String?
     let href: String?
+    let public_url: String?
+
 
 }
 

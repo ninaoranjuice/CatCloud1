@@ -108,7 +108,7 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
             return
         }
     let selectedFile = information[indexPath.row]
-        let selectedDetail = Detail(name: selectedFile.name, created: selectedFile.created, mime_type: selectedFile.mime_type, path: selectedFile.path, file: selectedFile.file, href: selectedFile.href)
+        let selectedDetail = Detail(name: selectedFile.name, created: selectedFile.created, mime_type: selectedFile.mime_type, path: selectedFile.path, file: selectedFile.file, href: selectedFile.href, public_url: selectedFile.public_url)
     let detailViewController = DetailViewController()
         detailViewController.information = selectedDetail
         detailViewController.onDeleteCompletion = { [weak self] in

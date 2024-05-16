@@ -30,7 +30,7 @@ class DetailViewRequest {
         }
         let type = urlComponents.last!
         let lastIndex = oldPath.lastIndex(of: "/")!
-        var change = String(oldPath[..<lastIndex])
+        let change = String(oldPath[..<lastIndex])
         let newPath = "\(change)/\(name).\(type)"
         let url = "https://cloud-api.yandex.net/v1/disk/resources/move?from=\(oldPath)&path=\(newPath)"
         
@@ -90,9 +90,9 @@ class DetailViewRequest {
                 }
             case .failure(let error):
                 print("Не удалось удалить файл, ошибка \(error.localizedDescription)")
-                        }
-                    }
-                }
+            }
+        }
+    }
     
     func loadDetailInformation(for file: Detail, completion: @escaping (Result<(Detail, Data), Error>) -> Void) {
         
@@ -122,13 +122,13 @@ class DetailViewRequest {
                         }
                     }
                 } catch {
-                        completion(.failure(error))
-                    }
-                case.failure(let error):
                     completion(.failure(error))
                 }
+            case.failure(let error):
+                completion(.failure(error))
             }
         }
+    }
     
     func loadFile(for detail: Detail, completion: @escaping (Result<Data, Error>) -> Void) {
         
@@ -140,7 +140,7 @@ class DetailViewRequest {
         let path = detail.path
         let baseUrlString = "https://cloud-api.yandex.net/v1/disk/resources/download?path=\(path)"
         let headers: HTTPHeaders = ["Authorization": "OAuth \(accessToken)"]
-                print("ссылка на скачку: \(baseUrlString)")
+        print("ссылка на скачку: \(baseUrlString)")
         
         AF.request(baseUrlString, headers: headers).responseData { response in
             switch response.result {
@@ -155,7 +155,7 @@ class DetailViewRequest {
                         return
                     }
                     print("ссылка на скачку самого файла: \(downloadLink)")
-
+                    
                     AF.download(downloadLink).responseData { downloadResponse in
                         switch downloadResponse.result {
                         case .success(let fileData):
@@ -191,7 +191,39 @@ class DetailViewRequest {
             return nil
         }
     }
-}
-
     
-   
+    func getALink(detail: Detail, completion: @escaping (Result<String, Error>) -> Void) {
+        let url = "https://cloud-api.yandex.net/v1/disk/resources/publish?path="
+        let path = detail.path
+        
+        guard let accessToken = TokenManager.shared.accessToken else {
+            print("Ошибка: отсутствует токен доступа")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": "OAuth \(accessToken)"]
+        AF.request("\(url)\(path)", method: .put, headers: headers).responseDecodable(of: PublishResponse.self) { response in
+            switch response.result {
+            case .success(let publishResponse):
+                    if let href = publishResponse.href {
+                        AF.request(href, method: .get, headers: headers).responseDecodable(of: PublicURLResponse.self) { response in
+                            switch response.result {
+                            case .success(let publicURLResponse):
+                                guard let publicURL = publicURLResponse.public_url else {
+                                    print("Ошибка. Не удалось получить финальную публичную ссылку.")
+                                    return
+                                }
+                                completion(.success(publicURL))
+                            case .failure(let error):
+                                print("Ошибка при получении финальной публичной ссылки: \(error.localizedDescription)")
+                                completion(.failure(error))
+                            }
+                        }
+                    }
+            case .failure(let error):
+                print("Ошибка \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
+}

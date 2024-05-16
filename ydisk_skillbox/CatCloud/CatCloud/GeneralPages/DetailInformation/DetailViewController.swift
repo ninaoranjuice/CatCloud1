@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
     var onDeleteCompletion: (() -> Void)?
     var onRenameCompletion: (() -> Void)?
     
+    var shareElement = ShareElement()
     
     var nameLabel = UILabel()
     var dateLabel = UILabel()
@@ -95,6 +96,7 @@ class DetailViewController: UIViewController {
         view.addSubview(loader)
         view.addSubview(renameButton)
         view.addSubview(buttonContainer)
+        view.addSubview(shareElement)
         
         loader.isHidden = true
         imageView.isHidden = true
@@ -102,6 +104,7 @@ class DetailViewController: UIViewController {
         webView.isHidden = true
         buttonContainer.isHidden = true
         renameButton.isHidden = true
+        shareElement.isHidden = true
         
     }
     
@@ -166,6 +169,11 @@ class DetailViewController: UIViewController {
             make.top.equalToSuperview().offset(35)
         }
         
+        shareElement.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(90)
+        }
     }
     
     private func loadData() {
@@ -175,7 +183,7 @@ class DetailViewController: UIViewController {
         }
         
         if SaveInfo.shared.getFileData(fileName: file.name) != nil {
-            let detail = Detail(name: file.name, created: file.created, mime_type: file.mime_type, path: file.path, file: file.file, href: file.href)
+            let detail = Detail(name: file.name, created: file.created, mime_type: file.mime_type, path: file.path, file: file.file, href: file.href, public_url: file.public_url)
             updateUI(with: detail)
         } else {
             DispatchQueue.main.async {
@@ -273,10 +281,21 @@ class DetailViewController: UIViewController {
     }
     
     @objc func tapSendButton() {
+        
     }
     
     @objc func tapShareButton() {
-        
+        request.getALink(detail: information!) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let publicUrl):
+                        self.shareElement.setLink(publicUrl)
+                        self.shareElement.isHidden = false
+                case .failure(let error):
+                    print("Ошибка при получении публичной ссылки: \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     @objc func tapDeleteButton() {

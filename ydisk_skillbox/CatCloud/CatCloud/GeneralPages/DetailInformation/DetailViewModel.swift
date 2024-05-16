@@ -12,8 +12,22 @@ struct Detail: Codable {
     let path: String
     let file: String?
     let href: String?
+    let public_url: String?
 }
 
 struct DownloadInfo: Codable {
     let href: String?
 }
+
+struct PublishResponse: Codable {
+    let href: String?
+}
+
+struct PublicURLResponse: Codable {
+    let public_url: String?
+}
+
+
+
+
+
