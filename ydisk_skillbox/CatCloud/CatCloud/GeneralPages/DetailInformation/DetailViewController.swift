@@ -281,8 +281,27 @@ class DetailViewController: UIViewController {
     }
     
     @objc func tapSendButton() {
-        
-    }
+        request.getALink(detail: information!) { result in
+             DispatchQueue.main.async {
+                 switch result {
+                 case .success(let publicUrl):
+                     self.showShareSheet(with: publicUrl)
+                 case .failure(let error):
+                     print("Ошибка при получении публичной ссылки: \(error.localizedDescription)")
+                 }
+             }
+         }
+     }
+
+     func showShareSheet(with publicUrl: String) {
+         let activityViewController = UIActivityViewController(activityItems: [URL(string: publicUrl)!], applicationActivities: nil)
+         if let popoverPresentationController = activityViewController.popoverPresentationController {
+             popoverPresentationController.sourceView = self.view
+             popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+             popoverPresentationController.permittedArrowDirections = []
+         }
+         present(activityViewController, animated: true, completion: nil)
+     }
     
     @objc func tapShareButton() {
         request.getALink(detail: information!) { result in
