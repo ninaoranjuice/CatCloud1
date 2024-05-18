@@ -23,6 +23,9 @@
 		2C5FEF3E2BF4B32000B881F8 /* abosanovabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C5FEF3C2BF4B32000B881F8 /* abosanovabold.ttf */; };
 		2C5FEF3F2BF4B32000B881F8 /* abosanova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C5FEF3D2BF4B32000B881F8 /* abosanova.ttf */; };
 		2C5FEF412BF6222300B881F8 /* ShareElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FEF402BF6222300B881F8 /* ShareElement.swift */; };
+		2C5FEF442BF795B500B881F8 /* PofileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FEF432BF795B500B881F8 /* PofileRequests.swift */; };
+		2C5FEF462BF7A0EE00B881F8 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FEF452BF7A0EE00B881F8 /* ProfileModel.swift */; };
+		2C5FEF482BF7A90300B881F8 /* CircleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FEF472BF7A90300B881F8 /* CircleChart.swift */; };
 		2C7B94612BF113F500A6272E /* File.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B945F2BF113F500A6272E /* File.xcdatamodeld */; };
 		2C7DF2CC2BDBF37300DC1F68 /* AllFilesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DF2CB2BDBF37300DC1F68 /* AllFilesRequests.swift */; };
 		2C7DF2CE2BDBF38100DC1F68 /* AllFilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7DF2CD2BDBF38100DC1F68 /* AllFilesModel.swift */; };
@@ -59,6 +62,9 @@
 		2C5FEF3C2BF4B32000B881F8 /* abosanovabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = abosanovabold.ttf; sourceTree = "<group>"; };
 		2C5FEF3D2BF4B32000B881F8 /* abosanova.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = abosanova.ttf; sourceTree = "<group>"; };
 		2C5FEF402BF6222300B881F8 /* ShareElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareElement.swift; sourceTree = "<group>"; };
+		2C5FEF432BF795B500B881F8 /* PofileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PofileRequests.swift; sourceTree = "<group>"; };
+		2C5FEF452BF7A0EE00B881F8 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		2C5FEF472BF7A90300B881F8 /* CircleChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChart.swift; sourceTree = "<group>"; };
 		2C7B94602BF113F500A6272E /* File.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = File.xcdatamodel; sourceTree = "<group>"; };
 		2C7DF2CB2BDBF37300DC1F68 /* AllFilesRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesRequests.swift; sourceTree = "<group>"; };
 		2C7DF2CD2BDBF38100DC1F68 /* AllFilesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesModel.swift; sourceTree = "<group>"; };
@@ -146,6 +152,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2C5FEF422BF6BF4D00B881F8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */,
+				2C5FEF432BF795B500B881F8 /* PofileRequests.swift */,
+				2C5FEF452BF7A0EE00B881F8 /* ProfileModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		2C7DF2CA2BDBF2F200DC1F68 /* AllFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +200,7 @@
 			children = (
 				2CA28E2C2BD15E63004DC585 /* Loader.swift */,
 				2C5FEF402BF6222300B881F8 /* ShareElement.swift */,
+				2C5FEF472BF7A90300B881F8 /* CircleChart.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -200,7 +217,7 @@
 		2CFBA2B52BBCB72500C43A48 /* GeneralPages */ = {
 			isa = PBXGroup;
 			children = (
-				2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */,
+				2C5FEF422BF6BF4D00B881F8 /* Profile */,
 				2CA28E272BD15D0B004DC585 /* LastFiles */,
 				2C7DF2CA2BDBF2F200DC1F68 /* AllFiles */,
 				2C5BB8A12BD058EA00F767D1 /* TapBarController.swift */,
@@ -350,12 +367,14 @@
 				2C7DF2D52BE1386800DC1F68 /* DetailViewModel.swift in Sources */,
 				2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */,
 				2CA28E292BD15D2D004DC585 /* LastFilesRequests.swift in Sources */,
+				2C5FEF482BF7A90300B881F8 /* CircleChart.swift in Sources */,
 				2C7DF2D72BE1387300DC1F68 /* DetailViewRequest.swift in Sources */,
 				2C875B0E2BD280480024497A /* Cell.swift in Sources */,
 				2C1161022BB5DE230080215C /* AppDelegate.swift in Sources */,
 				2CA28E302BD1664A004DC585 /* LastFilesModel.swift in Sources */,
 				2C11612D2BBB04890080215C /* PageView.swift in Sources */,
 				2C5BB89E2BD0581E00F767D1 /* LastFilesViewController.swift in Sources */,
+				2C5FEF462BF7A0EE00B881F8 /* ProfileModel.swift in Sources */,
 				2C7DF2D22BE1384300DC1F68 /* DetailViewController.swift in Sources */,
 				2C5BB8A62BD0692700F767D1 /* TokenManager.swift in Sources */,
 				2C7DF2CE2BDBF38100DC1F68 /* AllFilesModel.swift in Sources */,
@@ -363,6 +382,7 @@
 				2C5BB8A22BD058EA00F767D1 /* TapBarController.swift in Sources */,
 				2C5FEF412BF6222300B881F8 /* ShareElement.swift in Sources */,
 				2C11612B2BBB044F0080215C /* OnboardingModel.swift in Sources */,
+				2C5FEF442BF795B500B881F8 /* PofileRequests.swift in Sources */,
 				2C9C74202BEE2F3000809995 /* SaveInfo.swift in Sources */,
 				2C5BB8A02BD0583C00F767D1 /* AllFilesViewController.swift in Sources */,
 				2CA28E2D2BD15E63004DC585 /* Loader.swift in Sources */,
