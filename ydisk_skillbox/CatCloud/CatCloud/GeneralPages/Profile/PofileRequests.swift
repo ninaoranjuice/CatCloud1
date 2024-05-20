@@ -35,5 +35,13 @@ class ProfileRequests {
             }
         }
     }
+    
+    func logOut() {
+        SaveInfo.shared.deleteAllFiles()
+        TokenManager.shared.clearToken()
+        let register = MainViewController()
+           UIApplication.shared.windows.first?.rootViewController = register
+           UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
 }
 

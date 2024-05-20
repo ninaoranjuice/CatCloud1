@@ -21,4 +21,9 @@ class TokenManager {
             userDefaults.set(newValue, forKey: tokenKey)
         }
     }
+    
+    func clearToken() {
+        userDefaults.set(nil, forKey: tokenKey)
+            print("Токен очищен: \(accessToken)")
+    }
 }

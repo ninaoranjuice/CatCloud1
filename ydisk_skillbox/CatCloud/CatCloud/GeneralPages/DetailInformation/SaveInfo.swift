@@ -77,5 +77,21 @@ class SaveInfo {
             print("\(error)")
         }
     }
+    
+    func deleteAllFiles() {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<File> = File.fetchRequest()
+        
+        do {
+            let files = try context.fetch(fetchRequest)
+            for file in files {
+                context.delete(file)
+            }
+            try context.save()
+            print("Все файлы успешно удалены.")
+        } catch {
+            print("Ошибка удаления файлов: \(error.localizedDescription)")
+        }
+    }
 }
   

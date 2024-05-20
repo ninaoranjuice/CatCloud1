@@ -52,8 +52,8 @@ class ProfileViewController: UIViewController {
         publicButton.layer.borderColor = UIColor.black.cgColor
         publicButton.backgroundColor = UIColor.clear
         publicButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-
-
+        publicButton.addTarget(self, action: #selector(tapPublic), for: .touchUpInside)
+        
         exitButton.setTitle("Выйти", for: .normal)
         exitButton.titleLabel?.font = UIFont(name: "abosanova", size: 24)
         exitButton.setTitleColor(.black, for: .normal)
@@ -61,9 +61,8 @@ class ProfileViewController: UIViewController {
         exitButton.layer.borderColor = UIColor.black.cgColor
         exitButton.backgroundColor = UIColor.clear
         exitButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        exitButton.addTarget(self, action: #selector(tapExit), for: .touchUpInside)
 
-
-        
         view.addSubview(diagramCircle)
         view.addSubview(allMemory)
         view.addSubview(freeMemory)
@@ -123,16 +122,33 @@ class ProfileViewController: UIViewController {
     
     func updateUI(with diagramma: Diagramma) {
         DispatchQueue.main.async {
-            self.freeMemory.text = "Свободно памяти: \(self.toMB(chislo: diagramma.total_space)) MB"
-            self.occupiedMemory.text = "Занято памяти: \(self.toMB(chislo: diagramma.used_space)) MB"
-            self.allMemory.text = "\(self.toMB(chislo: diagramma.total_space + diagramma.used_space)) MB"
+            self.freeMemory.text = "Свободно памяти: \(self.toGB(chislo: diagramma.total_space)) ГБ"
+            self.occupiedMemory.text = "Занято памяти: \(self.toGB(chislo: diagramma.used_space)) ГБ"
+            self.allMemory.text = "\(self.toGB(chislo: diagramma.total_space + diagramma.used_space)) ГБ"
             
             self.diagramCircle.updateCircleChart(usedMemory: CGFloat(diagramma.used_space), totalMemory: CGFloat(diagramma.total_space + diagramma.used_space))
         }
     }
     
-    private func toMB(chislo: Int) -> Int {
-        return chislo/8/1024/1024
+    private func toGB(chislo: Int) -> Int {
+        return chislo/1024/1024/1024
+    }
+    
+    @objc func tapPublic() {
+    
+        }
+    
+    @objc func tapExit() {
+        let alertController = UIAlertController(title: "Выход", message: "Вы уверены, что хотите выйти? Все локальные данные будут удалены.", preferredStyle: .alert)
+       
+        let yesButton = UIAlertAction(title: "Подтвердить", style: .default) {_ in 
+            self.request.logOut()
+        }
+            alertController.addAction(yesButton)
+            
+            let noButton = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+            alertController.addAction(noButton)
+            present(alertController, animated: true, completion: nil)
     }
 }
 
