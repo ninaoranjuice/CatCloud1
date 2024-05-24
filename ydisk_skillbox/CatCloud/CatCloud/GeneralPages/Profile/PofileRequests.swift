@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import WebKit
 
 class ProfileRequests {
     
@@ -37,11 +38,27 @@ class ProfileRequests {
     }
     
     func logOut() {
-        SaveInfo.shared.deleteAllFiles()
         TokenManager.shared.clearToken()
+        SaveInfo.shared.deleteAllFiles()
+        deleteCookies()
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         let register = MainViewController()
-           UIApplication.shared.windows.first?.rootViewController = register
-           UIApplication.shared.windows.first?.makeKeyAndVisible()
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = register
+            window.makeKeyAndVisible()
+        }
+    }
+    
+    private func deleteCookies() {
+            HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            for record in records {
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record]) {
+                    print("Куки удалены для \(record)")
+                }
+            }
+        }
     }
 }
 

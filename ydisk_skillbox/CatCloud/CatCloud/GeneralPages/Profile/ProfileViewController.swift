@@ -135,8 +135,9 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func tapPublic() {
-    
-        }
+        let publicFilesController = PublicFilesController()
+        present(publicFilesController, animated: true, completion: nil)
+    }
     
     @objc func tapExit() {
         let alertController = UIAlertController(title: "Выход", message: "Вы уверены, что хотите выйти? Все локальные данные будут удалены.", preferredStyle: .alert)
@@ -151,6 +152,3 @@ class ProfileViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
     }
 }
-
-
-

@@ -15,6 +15,9 @@
 		2C1161292BBAFECC0080215C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1161282BBAFECC0080215C /* OnboardingViewController.swift */; };
 		2C11612B2BBB044F0080215C /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11612A2BBB044F0080215C /* OnboardingModel.swift */; };
 		2C11612D2BBB04890080215C /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11612C2BBB04890080215C /* PageView.swift */; };
+		2C3758832BFF53E50092DFF0 /* PublicFilesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3758822BFF53E50092DFF0 /* PublicFilesController.swift */; };
+		2C3758852BFF54370092DFF0 /* PublicFilesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3758842BFF54370092DFF0 /* PublicFilesRequests.swift */; };
+		2C3758872BFF546B0092DFF0 /* PublicFilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3758862BFF546B0092DFF0 /* PublicFilesModel.swift */; };
 		2C5537092BD7142E004DC0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5537082BD71291004DC0BE /* Assets.xcassets */; };
 		2C5BB89E2BD0581E00F767D1 /* LastFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB89D2BD0581E00F767D1 /* LastFilesViewController.swift */; };
 		2C5BB8A02BD0583C00F767D1 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BB89F2BD0583C00F767D1 /* AllFilesViewController.swift */; };
@@ -53,6 +56,9 @@
 		2C1161282BBAFECC0080215C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C11612A2BBB044F0080215C /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		2C11612C2BBB04890080215C /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		2C3758822BFF53E50092DFF0 /* PublicFilesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFilesController.swift; sourceTree = "<group>"; };
+		2C3758842BFF54370092DFF0 /* PublicFilesRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFilesRequests.swift; sourceTree = "<group>"; };
+		2C3758862BFF546B0092DFF0 /* PublicFilesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFilesModel.swift; sourceTree = "<group>"; };
 		2C5537082BD71291004DC0BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = CatCloud/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		2C5BB89D2BD0581E00F767D1 /* LastFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesViewController.swift; sourceTree = "<group>"; };
 		2C5BB89F2BD0583C00F767D1 /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +164,9 @@
 				2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */,
 				2C5FEF432BF795B500B881F8 /* PofileRequests.swift */,
 				2C5FEF452BF7A0EE00B881F8 /* ProfileModel.swift */,
+				2C3758822BFF53E50092DFF0 /* PublicFilesController.swift */,
+				2C3758842BFF54370092DFF0 /* PublicFilesRequests.swift */,
+				2C3758862BFF546B0092DFF0 /* PublicFilesModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -372,6 +381,7 @@
 				2C875B0E2BD280480024497A /* Cell.swift in Sources */,
 				2C1161022BB5DE230080215C /* AppDelegate.swift in Sources */,
 				2CA28E302BD1664A004DC585 /* LastFilesModel.swift in Sources */,
+				2C3758832BFF53E50092DFF0 /* PublicFilesController.swift in Sources */,
 				2C11612D2BBB04890080215C /* PageView.swift in Sources */,
 				2C5BB89E2BD0581E00F767D1 /* LastFilesViewController.swift in Sources */,
 				2C5FEF462BF7A0EE00B881F8 /* ProfileModel.swift in Sources */,
@@ -381,8 +391,10 @@
 				2C7DF2CC2BDBF37300DC1F68 /* AllFilesRequests.swift in Sources */,
 				2C5BB8A22BD058EA00F767D1 /* TapBarController.swift in Sources */,
 				2C5FEF412BF6222300B881F8 /* ShareElement.swift in Sources */,
+				2C3758872BFF546B0092DFF0 /* PublicFilesModel.swift in Sources */,
 				2C11612B2BBB044F0080215C /* OnboardingModel.swift in Sources */,
 				2C5FEF442BF795B500B881F8 /* PofileRequests.swift in Sources */,
+				2C3758852BFF54370092DFF0 /* PublicFilesRequests.swift in Sources */,
 				2C9C74202BEE2F3000809995 /* SaveInfo.swift in Sources */,
 				2C5BB8A02BD0583C00F767D1 /* AllFilesViewController.swift in Sources */,
 				2CA28E2D2BD15E63004DC585 /* Loader.swift in Sources */,

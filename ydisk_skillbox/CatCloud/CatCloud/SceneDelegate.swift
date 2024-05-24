@@ -13,21 +13,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let userDefaults = UserDefaults.standard
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-                
-        if userDefaults.bool(forKey: "onboarding") && userDefaults.bool(forKey: "registration") {
-            window?.rootViewController = TapBarController()
-        }
-        else if userDefaults.bool(forKey: "onboarding") && userDefaults.bool(forKey: "registation") == false {
-            userDefaults.set(true, forKey: "registration")
-            window?.rootViewController = MainViewController()
-        }
-        else {
-            userDefaults.set(true, forKey: "onboarding")
+        
+        if TokenManager.shared.accessToken == nil {
             openOnboarding()
+        } else {
+            if userDefaults.bool(forKey: "registration") {
+                window?.rootViewController = TapBarController()
+            } else {
+                window?.rootViewController = MainViewController()
+            }
         }
     }
-    
+                
     func openOnboarding() {
+        print("Открывается экран OnboardingViewController")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
             let onboardingViewController = OnboardingViewController()
