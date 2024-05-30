@@ -66,7 +66,8 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func refreshData() {
         information.removeAll()
-        loadPage(offset: 0)
+        offset = 0
+        loadPage(offset: offset)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,6 +155,26 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             present(detailViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let selectedFile = information[indexPath.row]
+            guard let publicKey = selectedFile.public_key, let path = selectedFile.path else {
+                print("Нет ключа публикации или пути для выбранного файла.")
+                return
+            }
+            request.unpublic(path: path) { [weak self] error in
+                if let error = error {
+                    print("Ошибка \(error.localizedDescription)")
+                } else {
+                    DispatchQueue.main.async {
+                        self?.information.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
+            }
         }
     }
 }

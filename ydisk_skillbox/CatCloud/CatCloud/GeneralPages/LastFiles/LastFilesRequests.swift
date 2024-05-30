@@ -15,7 +15,6 @@ class LastFilesRequests {
         
         let parameters: [String: Any] = [
             "limit": "10",
-            "media_type": "document, image, text, spreadsheet",
             "fields": "preview, name, created, size",
             "preview_size": "M",
             "preview_crop": "true"

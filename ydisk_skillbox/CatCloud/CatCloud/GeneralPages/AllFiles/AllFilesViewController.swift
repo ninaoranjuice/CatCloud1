@@ -19,7 +19,7 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
     var refreshControl = UIRefreshControl()
     
     var onDeleteCompletion: (() -> Void)?
-
+    
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -28,7 +28,7 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
         setUI()
         loadPage(offset: offset)
     }
-
+    
     private func setUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
@@ -56,9 +56,9 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
     
     func updateData(_ informationArray: [Info]) {
         information.append(contentsOf: informationArray)
-       DispatchQueue.main.async {
-        self.tableView.reloadData()
-        self.refreshControl.endRefreshing()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -117,24 +117,42 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
             print("Ошибка, файл по индексу не найден.")
             return
         }
-    let selectedFile = information[indexPath.row]
-        let selectedDetail = Detail(name: selectedFile.name, created: selectedFile.created, mime_type: selectedFile.mime_type, path: selectedFile.path, file: selectedFile.file, href: selectedFile.href, public_url: selectedFile.public_url)
-    let detailViewController = DetailViewController()
-        detailViewController.information = selectedDetail
-        detailViewController.onDeleteCompletion = { [weak self] in
-            DispatchQueue.main.async {
-                self?.refreshData()
-                self?.tableView.reloadData()
+        let selectedFile = information[indexPath.row]
+        
+        if selectedFile.type == "dir" {
+            
+            request.loadContentsOfFolder(path: selectedFile.path, for: self) { [weak self] items in
+                if let items = items, !items.isEmpty {
+                    DispatchQueue.main.async {
+                        self?.information = items
+                        self?.tableView.reloadData()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Пустая папка", message: "В выбранной папке нет файлов.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                }
             }
-        }
-        detailViewController.onRenameCompletion = { [weak self] in
-            DispatchQueue.main.async {
-                self?.refreshData()
-                self?.tableView.reloadData()
+        } else {
+            let selectedDetail = Detail(name: selectedFile.name, created: selectedFile.created, mime_type: selectedFile.mime_type, path: selectedFile.path, file: selectedFile.file, href: selectedFile.href, public_url: selectedFile.public_url)
+            let detailViewController = DetailViewController()
+            detailViewController.information = selectedDetail
+            detailViewController.onDeleteCompletion = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.refreshData()
+                    self?.tableView.reloadData()
+                }
             }
+            detailViewController.onRenameCompletion = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.refreshData()
+                    self?.tableView.reloadData()
+                }
+            }
+            present(detailViewController, animated: true, completion: nil)
         }
-        present(detailViewController, animated: true, completion: nil)
     }
 }
-
 
