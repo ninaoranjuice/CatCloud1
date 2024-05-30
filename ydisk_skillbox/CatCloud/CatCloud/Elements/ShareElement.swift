@@ -18,7 +18,7 @@ class ShareElement: UIView {
         super.init(frame: frame)
         
         linkLabel.numberOfLines = 2
-        linkLabel.text = "Ссылка"
+        linkLabel.text = Constants.Text.Elements.link
         linkLabel.lineBreakMode = .byTruncatingTail
         
         copyButton.setImage(UIImage(named: "doc_icon"), for: .normal)

@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Детальная информация"
+        title = Constants.Text.DetailInformation.detailTitle
         loadData()
         setUI()
         setConstraints()
@@ -48,13 +48,13 @@ class DetailViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .systemGray
         
-        nameLabel.text = "Название файла: "
+        nameLabel.text = Constants.Text.DetailInformation.detailName
         nameLabel.font = UIFont(name: "abosanovabold", size: 24)
         nameLabel.numberOfLines = 1
         nameLabel.lineBreakMode = .byTruncatingTail
         nameLabel.textAlignment = .center
         
-        dateLabel.text = "Создан: "
+        dateLabel.text = Constants.Text.Profile.create
         dateLabel.font = UIFont(name: "abosanova", size: 24)
         
         sendButton.setImage(UIImage(named: "send"), for: .normal)
@@ -318,11 +318,11 @@ class DetailViewController: UIViewController {
     }
     
     @objc func tapDeleteButton() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы собираетесь удалить файл.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Oк", style: .default) { [weak self] _ in
+        let alertController = UIAlertController(title: Constants.Text.DetailInformation.detailAlertName, message: Constants.Text.DetailInformation.detailAlertMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: Constants.Text.Profile.ok, style: .default) { [weak self] _ in
             self?.request.deleteFile(detail: self!.information!)
-            let secondAlertController = UIAlertController(title: "Успешно.", message: "Файл был успешно удален.", preferredStyle: .alert)
-            let okActionSecond = UIAlertAction(title: "OK", style: .default) { _ in
+            let secondAlertController = UIAlertController(title: Constants.Text.DetailInformation.good, message: Constants.Text.DetailInformation.goodMessage, preferredStyle: .alert)
+            let okActionSecond = UIAlertAction(title: Constants.Text.Profile.ok, style: .default) { _ in
                 DispatchQueue.main.async {
                     self?.onDeleteCompletion?()
                     self?.dismiss(animated: true, completion: nil)
@@ -334,7 +334,7 @@ class DetailViewController: UIViewController {
             }
         }
         alertController.addAction(okAction)
-        let noAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let noAction = UIAlertAction(title: Constants.Text.Profile.alertExit, style: .cancel, handler: nil)
         alertController.addAction(noAction)
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
@@ -342,11 +342,11 @@ class DetailViewController: UIViewController {
     }
     
     @objc func tapRenameButton() {
-        let alertController = UIAlertController(title: "Переименовать файл", message: "Введите новое имя файла", preferredStyle: .alert)
+        let alertController = UIAlertController(title: Constants.Text.DetailInformation.rename, message: Constants.Text.DetailInformation.renameMessage, preferredStyle: .alert)
         alertController.addTextField { text in
-            text.placeholder = "Новое имя"
+            text.placeholder = Constants.Text.DetailInformation.newName
         }
-        let saveButton = UIAlertAction(title: "Сохранить", style: .default) { [weak self] _ in
+        let saveButton = UIAlertAction(title: Constants.Text.DetailInformation.save, style: .default) { [weak self] _ in
             guard let newName = alertController.textFields?.first?.text, !newName.isEmpty else {
                 print("Пользователь не ввел ничего.")
                 return
@@ -365,7 +365,7 @@ class DetailViewController: UIViewController {
         }
         alertController.addAction(saveButton)
         
-        let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: Constants.Text.Profile.alertCancel, style: .cancel, handler: nil)
         alertController.addAction(cancel)
         present(alertController, animated: true, completion: nil)
     }

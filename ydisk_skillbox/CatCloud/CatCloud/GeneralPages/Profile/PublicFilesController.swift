@@ -24,7 +24,7 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
-        title = "Опубликованные файлы"
+        title = Constants.Text.Profile.publicButtonHeader
         setUI()
         loadPage()
     }
@@ -42,7 +42,6 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func loadPage() {
-        print("1 проверка. начинается загрузка файлов...")
         request.loadPublicFiles(for: self)
     }
     
@@ -69,8 +68,8 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
         cell.loader.startAnimating()
         
         cell.nameLabel.text = info.name
-        cell.createdLabel.text = "Создан: \(String(describing: request.formatDate(info.created)!))"
-        cell.sizeLabel.text = "Размер: \((info.size ?? 1) / 1024) КБ"
+        cell.createdLabel.text = "\(Constants.Text.Profile.create) \(String(describing: request.formatDate(info.created)!))"
+        cell.sizeLabel.text = "\(Constants.Text.Profile.size) \((info.size ?? 1) / 1024) \(Constants.Text.Profile.kb)"
         
         if let urlString = info.preview,
            let url = URL(string: urlString) {
@@ -122,8 +121,8 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
                     }
                 } else {
                     DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Папка пуста", message: "В выбранной папке нет файлов.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        let alert = UIAlertController(title: Constants.Text.Profile.empty, message: Constants.Text.Profile.emptyMessage, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: Constants.Text.Profile.ok, style: .default, handler: nil))
                         self!.present(alert, animated: true, completion: nil)
                     }
                 }

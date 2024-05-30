@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  CatCloud
+
+  Created by Нина Гурстиева on 30.05.2024.
+  
+*/
+"name" = "CATCLOUD";
+"login" = "Войти";
+
+"profile" = "Профиль";
+"lastFile" = "Последние файлы";
+"allFile" = "Все файлы";
+
+"freeMemory" = "Свободно памяти: ";
+"usedMemory" = "Занято памяти: ";
+"publicButtonHeader" = "Опубликованные файлы";
+"exitButtonHeader" = "Выход";
+"diagrammaFree" = "Памяти свободно: ";
+"diagrammaUsed" = "Памяти используется: ";
+"gb" = "ГБ";
+"alertExit" = "Выход";
+"alertMessage" = "Вы уверены, что хотите выйти из приложения? Все сохраненные данные будут удалены.";
+"alertYes" = "Подтвердить";
+"alertCancel" = "Отмена";
+"create" = "Создан: ";
+"size" = "Размер: ";
+"kb" = "КБ";
+"ok" = "OK";
+"empty" = "Пусто";
+"empty message" = "Папка пуста.";
+"loadMore" = "Загрузить еще...";
+"detailTitle" = "Детальная информация";
+"detailName" = "Имя файла: ";
+"detailAlertName" = "Внимание!";
+"detailAlertMessage" = "Вы собираетесь удалить файл?";
+"good" = "Успешно.";
+"goodMessage" = "Файл был успешно удален.";
+"rename" = "Переименовать файл";
+"renameMessage" = "Введите новое имя файла.";
+"newName" = "Новое имя: ";
+"save" = "Сохранить";
+"firstName" = "Храни";
+"firstMessage" = "Теперь можно хранить все свои документы в одном месте";
+"secondName" = "Открывай";
+"secondMessage" = "Доступ к файлам останется даже без интернета";
+"thirdName" = "Делись";
+"thirdMessage" = "Делитесь вашими файлами с другими";
+"next" = "Далее";
+"link" = "Ссылка";

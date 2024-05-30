@@ -24,7 +24,7 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
-        title = "Все файлы"
+        title = Constants.Text.TapBarController.allFile
         setUI()
         loadPage(offset: offset)
     }
@@ -37,7 +37,7 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.refreshControl = refreshControl
         
         tableView.tableFooterView = loadButton
-        loadButton.setTitle("Загрузить еще", for: .normal)
+        loadButton.setTitle(Constants.Text.Profile.loadMore, for: .normal)
         loadButton.addTarget(self, action: #selector(loadButtonTapped), for: .touchUpInside)
         
         tableView.snp.makeConstraints { make in
@@ -78,8 +78,8 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
         cell.loader.startAnimating()
         
         cell.nameLabel.text = info.name
-        cell.createdLabel.text = "Создан: \(String(describing: request.formatDate(info.created)!))"
-        cell.sizeLabel.text = "Размер: \((info.size) / 8 / 1024) КБ"
+        cell.createdLabel.text = "\(Constants.Text.Profile.create) \(String(describing: request.formatDate(info.created)!))"
+        cell.sizeLabel.text = "\(Constants.Text.Profile.size) \((info.size) / 8 / 1024) \(Constants.Text.Profile.kb)"
         
         if let urlString = info.preview,
            let url = URL(string: urlString) {
@@ -133,7 +133,6 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
                 self?.tableView.reloadData()
             }
         }
-        print("ПОЛУЧИЛОСЬ СДЕЛАТЬ ЗАПРОС.")
         present(detailViewController, animated: true, completion: nil)
     }
 }

@@ -57,7 +57,7 @@ class PageView: UIView {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(descriptionLabel)
         
-        nextButton.setTitle("Далее", for: .normal)
+        nextButton.setTitle(Constants.Text.Onboarding.next, for: .normal)
         nextButton.setTitleColor(.blue, for: .normal)
         nextButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         nextButton.backgroundColor = .lightGray

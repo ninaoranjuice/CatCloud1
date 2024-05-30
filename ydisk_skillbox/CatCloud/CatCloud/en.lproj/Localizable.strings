@@ -1,0 +1,50 @@
+/* 
+  Localizable.strings
+  CatCloud
+
+  Created by Нина Гурстиева on 30.05.2024.
+  
+*/
+"name" = "CATCLOUD";
+"login" = "Login";
+
+"profile" = "Profile";
+"lastFile" = "Last Files";
+"allFile" = "All Files";
+
+"freeMemory" = "Memory free: ";
+"usedMemory" = "Memory used: ";
+"publicButtonHeader" = "Published Files";
+"exitButtonHeader" = "Exit";
+"diagrammaFree" = "Memory free: ";
+"diagrammaUsed" = "Memory used: ";
+"gb" = "GB";
+"alertExit" = "Exit";
+"alertMessage" = "Are you sure you want to exit the application? All local data will be deleted.";
+"alertYes" = "Confirm";
+"alertCancel" = "Cancel";
+"create" = "Created: ";
+"size" = "Size: ";
+"kb" = "KB";
+"ok" = "OK";
+"empty" = "Empty";
+"empty message" = "Folder is empty.";
+"loadMore" = "Load more";
+"detailTitle" = "Detail Information";
+"detailName" = "File name: ";
+"detailAlertName" = "Attention!";
+"detailAlertMessage" = "Are you going to delete the file?";
+"good" = "Successfully";
+"goodMessage" = "The file was successfully deleted.";
+"rename" = "Rename file";
+"renameMessage" = "Enter a new file name.";
+"newName" = "New name: ";
+"save" = "Save";
+"firstName" = "Keep";
+"firstMessage" = "Now you can store all your documents in one place";
+"secondName" = "Open";
+"secondMessage" = "Access to files will remain even without the Internet";
+"thirdName" = "Share";
+"thirdMessage" = "Share your files with others";
+"next" = "Next";
+"link" = "Ссылка";

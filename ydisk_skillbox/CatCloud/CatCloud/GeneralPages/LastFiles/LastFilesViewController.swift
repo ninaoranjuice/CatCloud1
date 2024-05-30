@@ -23,7 +23,7 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
-        title = "Последние файлы"
+        title = Constants.Text.TapBarController.lastFile
         setUI()
         loadPage()
     }
@@ -68,8 +68,8 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.loader.startAnimating()
         
         cell.nameLabel.text = info.name
-        cell.createdLabel.text = "Создан: \(String(describing: request.formatDate(info.created)!))"
-        cell.sizeLabel.text = "Размер: \((info.size) / 8 / 1024) КБ"
+        cell.createdLabel.text = "\(Constants.Text.Profile.create) \(String(describing: request.formatDate(info.created)!))"
+        cell.sizeLabel.text = "\(Constants.Text.Profile.size) \((info.size) / 8 / 1024) \(Constants.Text.Profile.kb)"
         
         if let urlString = info.preview,
            let url = URL(string: urlString) {
@@ -122,7 +122,6 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
                 self?.tableView.reloadData()
             }
         }
-        print("ПОЛУЧИЛОСЬ СДЕЛАТЬ ЗАПРОС.")
         present(detailViewController, animated: true, completion: nil)
     }
 }

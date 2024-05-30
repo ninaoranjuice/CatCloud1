@@ -13,9 +13,9 @@ class OnboardingViewController: UIViewController {
     let pageControl = UIPageControl()
     
     let pages = [
-        OnboardingPage(image: UIImage(named: "Onboarding1"), title: "Храни", description: "Теперь можно хранить все свои документы в одном месте"),
-        OnboardingPage(image: UIImage(named: "Onboarding2"), title: "Открывай", description: "Доступ к файлам останется даже без интернета"),
-        OnboardingPage(image: UIImage(named: "Onboarding3"), title: "Делись", description: "Делитесь вашими файлами с другими"),
+        OnboardingPage(image: UIImage(named: "Onboarding1"), title: Constants.Text.Onboarding.firstName, description: Constants.Text.Onboarding.firstMessage),
+        OnboardingPage(image: UIImage(named: "Onboarding2"), title: Constants.Text.Onboarding.secondName, description: Constants.Text.Onboarding.secondMessage),
+        OnboardingPage(image: UIImage(named: "Onboarding3"), title: Constants.Text.Onboarding.thirdName, description: Constants.Text.Onboarding.thirdMessage),
     ]
     
     override func viewDidLoad() {

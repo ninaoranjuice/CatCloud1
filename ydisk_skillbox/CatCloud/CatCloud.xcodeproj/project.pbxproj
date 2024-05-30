@@ -40,6 +40,8 @@
 		2CA28E292BD15D2D004DC585 /* LastFilesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA28E282BD15D2D004DC585 /* LastFilesRequests.swift */; };
 		2CA28E2D2BD15E63004DC585 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA28E2C2BD15E63004DC585 /* Loader.swift */; };
 		2CA28E302BD1664A004DC585 /* LastFilesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA28E2F2BD1664A004DC585 /* LastFilesModel.swift */; };
+		2CBF68572C08DD2C00BA4AAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF68552C08DD2C00BA4AAB /* Localizable.strings */; };
+		2CBF685C2C08DE5A00BA4AAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF685B2C08DE5A00BA4AAB /* Constants.swift */; };
 		2CFBA2AC2BBCA25A00C43A48 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */; };
 		2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */; };
 		A8582708AFE13DBEFAFB3BC1 /* Pods_CatCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DA9DC913709ECF99493F77 /* Pods_CatCloud.framework */; };
@@ -82,6 +84,11 @@
 		2CA28E282BD15D2D004DC585 /* LastFilesRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesRequests.swift; sourceTree = "<group>"; };
 		2CA28E2C2BD15E63004DC585 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		2CA28E2F2BD1664A004DC585 /* LastFilesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFilesModel.swift; sourceTree = "<group>"; };
+		2CBF68562C08DD2C00BA4AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2CBF68582C08DD6C00BA4AAB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		2CBF68592C08DD6C00BA4AAB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2CBF685A2C08DD6C00BA4AAB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2CBF685B2C08DE5A00BA4AAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75C16E25858ED5D7CACE5D8F /* Pods-CatCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatCloud.debug.xcconfig"; path = "Target Support Files/Pods-CatCloud/Pods-CatCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +141,8 @@
 				2C11610C2BB5DE240080215C /* LaunchScreen.storyboard */,
 				2C11610F2BB5DE240080215C /* Info.plist */,
 				2C5537082BD71291004DC0BE /* Assets.xcassets */,
+				2CBF68552C08DD2C00BA4AAB /* Localizable.strings */,
+				2CBF685B2C08DE5A00BA4AAB /* Constants.swift */,
 			);
 			path = CatCloud;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 2C1160F52BB5DE230080215C;
 			productRefGroup = 2C1160FF2BB5DE230080215C /* Products */;
@@ -313,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5FEF3E2BF4B32000B881F8 /* abosanovabold.ttf in Resources */,
+				2CBF68572C08DD2C00BA4AAB /* Localizable.strings in Resources */,
 				2C11610E2BB5DE240080215C /* Base in Resources */,
 				2C5537092BD7142E004DC0BE /* Assets.xcassets in Resources */,
 				2C1161092BB5DE230080215C /* Base in Resources */,
@@ -378,6 +389,7 @@
 				2CA28E292BD15D2D004DC585 /* LastFilesRequests.swift in Sources */,
 				2C5FEF482BF7A90300B881F8 /* CircleChart.swift in Sources */,
 				2C7DF2D72BE1387300DC1F68 /* DetailViewRequest.swift in Sources */,
+				2CBF685C2C08DE5A00BA4AAB /* Constants.swift in Sources */,
 				2C875B0E2BD280480024497A /* Cell.swift in Sources */,
 				2C1161022BB5DE230080215C /* AppDelegate.swift in Sources */,
 				2CA28E302BD1664A004DC585 /* LastFilesModel.swift in Sources */,
@@ -409,6 +421,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C1161082BB5DE230080215C /* Base */,
+				2CBF68582C08DD6C00BA4AAB /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -417,8 +430,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C11610D2BB5DE240080215C /* Base */,
+				2CBF68592C08DD6C00BA4AAB /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2CBF68552C08DD2C00BA4AAB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CBF68562C08DD2C00BA4AAB /* en */,
+				2CBF685A2C08DD6C00BA4AAB /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -429,6 +452,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -494,6 +518,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

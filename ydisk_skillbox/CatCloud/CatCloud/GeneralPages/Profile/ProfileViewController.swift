@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Профиль"
+        title = Constants.Text.TapBarController.profile
         setUI()
         setConstraints()
         loadInfo()
@@ -33,11 +33,11 @@ class ProfileViewController: UIViewController {
         
         diagramCircle = CircleChart(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
-        freeMemory.text = "Свободно памяти: "
+        freeMemory.text = Constants.Text.Profile.freeMemory
         freeMemory.font = UIFont(name: "abosanova", size: 24)
         freeMemory.textColor = .systemPink
         
-        occupiedMemory.text = "Занято памяти: "
+        occupiedMemory.text = Constants.Text.Profile.usedMemory
         occupiedMemory.font = UIFont(name: "abosanova", size: 24)
         occupiedMemory.textColor = .systemBlue
         
@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController {
         allMemory.font = UIFont(name: "abosanova", size: 24)
         allMemory.textColor = .green
         
-        publicButton.setTitle("Опубликованные файлы", for: .normal)
+        publicButton.setTitle(Constants.Text.Profile.publicButtonHeader, for: .normal)
         publicButton.setTitleColor(.black, for: .normal)
         publicButton.titleLabel?.font = UIFont(name: "abosanova", size: 24)
         publicButton.layer.borderWidth = 2.0
@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
         publicButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         publicButton.addTarget(self, action: #selector(tapPublic), for: .touchUpInside)
         
-        exitButton.setTitle("Выйти", for: .normal)
+        exitButton.setTitle(Constants.Text.Profile.exitButtonHeader, for: .normal)
         exitButton.titleLabel?.font = UIFont(name: "abosanova", size: 24)
         exitButton.setTitleColor(.black, for: .normal)
         exitButton.layer.borderWidth = 2.0
@@ -122,9 +122,9 @@ class ProfileViewController: UIViewController {
     
     func updateUI(with diagramma: Diagramma) {
         DispatchQueue.main.async {
-            self.freeMemory.text = "Свободно памяти: \(self.toGB(chislo: diagramma.total_space)) ГБ"
-            self.occupiedMemory.text = "Занято памяти: \(self.toGB(chislo: diagramma.used_space)) ГБ"
-            self.allMemory.text = "\(self.toGB(chislo: diagramma.total_space + diagramma.used_space)) ГБ"
+            self.freeMemory.text = "\(Constants.Text.Profile.diagrammaFree) \(self.toGB(chislo: diagramma.total_space)) \(Constants.Text.Profile.gb)"
+            self.occupiedMemory.text = "\(Constants.Text.Profile.diagrammaUsed)\(self.toGB(chislo: diagramma.used_space)) \(Constants.Text.Profile.gb)"
+            self.allMemory.text = "\(self.toGB(chislo: diagramma.total_space + diagramma.used_space)) \(Constants.Text.Profile.gb)"
             
             self.diagramCircle.updateCircleChart(usedMemory: CGFloat(diagramma.used_space), totalMemory: CGFloat(diagramma.total_space + diagramma.used_space))
         }
@@ -140,14 +140,14 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func tapExit() {
-        let alertController = UIAlertController(title: "Выход", message: "Вы уверены, что хотите выйти? Все локальные данные будут удалены.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: Constants.Text.Profile.alertExit, message: Constants.Text.Profile.alertMessage, preferredStyle: .alert)
        
-        let yesButton = UIAlertAction(title: "Подтвердить", style: .default) {_ in 
+        let yesButton = UIAlertAction(title: Constants.Text.Profile.alertYes, style: .default) {_ in
             self.request.logOut()
         }
             alertController.addAction(yesButton)
             
-            let noButton = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+            let noButton = UIAlertAction(title: Constants.Text.Profile.alertCancel, style: .cancel, handler: nil)
             alertController.addAction(noButton)
             present(alertController, animated: true, completion: nil)
     }

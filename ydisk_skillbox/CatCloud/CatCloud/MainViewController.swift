@@ -26,12 +26,12 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
 
         text.textColor = .blue
-        text.text = "CATCLOUD"
+        text.text = Constants.Text.MainViewController.name
         text.font = .boldSystemFont(ofSize: 40)
 
         image.contentMode = .scaleAspectFit
         
-        registrationButton.setTitle("Войти", for: .normal)
+        registrationButton.setTitle(Constants.Text.MainViewController.login, for: .normal)
         registrationButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         stackView.axis = .vertical
