@@ -11,7 +11,7 @@ import Alamofire
 
 class PublicFilesRequests {
     
-    func loadPublicFiles(for viewController: PublicFilesController) {
+    func loadPublicFiles(for viewController: PublicFilesController, offset: Int) {
         let baseURL = "https://cloud-api.yandex.net/v1/disk/resources/public"
         let limit = "10"
         let fields = "preview, name, created, size, mime_type"
@@ -20,7 +20,8 @@ class PublicFilesRequests {
         let parameters: Parameters = [
             "limit": limit,
             "fields": fields,
-            "preview_size": previewSize
+            "preview_size": previewSize,
+            "offset": offset
         ]
         
         AF.request(baseURL, parameters: parameters, headers: HTTPHeaders(["Authorization": "OAuth \(TokenManager.shared.accessToken ?? "")"])).responseDecodable(of: PublicFilesResponse.self) { response in

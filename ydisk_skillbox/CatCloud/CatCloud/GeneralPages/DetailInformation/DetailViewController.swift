@@ -28,6 +28,7 @@ class DetailViewController: UIViewController {
     var pdfView = PDFView()
     var webView = WKWebView()
     let loader = Loader(style: .large)
+    let loading = Loading()
     
     let sendButton = UIButton(type: .system)
     let shareButton = UIButton(type: .system)
@@ -94,11 +95,13 @@ class DetailViewController: UIViewController {
         view.addSubview(nameLabel)
         view.addSubview(dateLabel)
         view.addSubview(loader)
+        view.addSubview(loading)
         view.addSubview(renameButton)
         view.addSubview(buttonContainer)
         view.addSubview(shareElement)
         
         loader.isHidden = true
+        loading.isHidden = true
         imageView.isHidden = true
         pdfView.isHidden = true
         webView.isHidden = true
@@ -141,6 +144,13 @@ class DetailViewController: UIViewController {
         
         loader.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
+        }
+        
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(loader).offset(-150)
+            make.width.equalTo(250)
+            make.height.greaterThanOrEqualTo(100)
         }
         
         buttonContainer.snp.makeConstraints { make in
@@ -189,6 +199,7 @@ class DetailViewController: UIViewController {
             DispatchQueue.main.async {
                 self.loader.isHidden = false
                 self.loader.startAnimating()
+                self.loading.isHidden = false
             }
             request.loadDetailInformation(for: file) { [weak self] result in
                 switch result {
@@ -231,6 +242,7 @@ class DetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.loader.isHidden = true
                     self.loader.stopAnimating()
+                    self.loading.isHidden = true
                     self.imageView.image = image
                     self.imageView.isHidden = false
                     print("картинка загружена успешно.")
@@ -243,6 +255,7 @@ class DetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.loader.isHidden = true
                     self.loader.stopAnimating()
+                    self.loading.isHidden = true
                     self.pdfView.document = document
                     self.pdfView.isHidden = false
                     print("PDF загружен успешно.")
@@ -257,6 +270,7 @@ class DetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.loader.isHidden = true
                     self.loader.stopAnimating()
+                    self.loading.isHidden = true
                     self.webView.loadFileURL(temporaryFile, allowingReadAccessTo: temporaryDirectory)
                     self.webView.isHidden = false
                     self.loadButtons()
@@ -268,6 +282,9 @@ class DetailViewController: UIViewController {
             DispatchQueue.main.async {
                 self.loader.isHidden = true
                 self.loader.stopAnimating()
+                self.loading.isHidden = true
+                self.imageView.image = UIImage(named: "image_unknown")
+                self.imageView.isHidden = false
                 self.loadButtons()
             }
         }

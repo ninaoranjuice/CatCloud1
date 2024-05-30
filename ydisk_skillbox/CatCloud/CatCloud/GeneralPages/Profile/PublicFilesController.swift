@@ -16,6 +16,8 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     var request = PublicFilesRequests()
     var information: [PublicFiles] = []
     var refreshControl = UIRefreshControl()
+    var loadButton = UIButton(type: .infoLight)
+    var offset = 0
     
     var onDeleteCompletion: (() -> Void)?
     
@@ -26,7 +28,7 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
         title = Constants.Text.Profile.publicButtonHeader
         setUI()
-        loadPage()
+        loadPage(offset: offset)
     }
     
     private func setUI() {
@@ -36,17 +38,26 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
+        tableView.tableFooterView = loadButton
+        loadButton.setTitle(Constants.Text.Profile.loadMore, for: .normal)
+        loadButton.addTarget(self, action: #selector(loadButtonTapped), for: .touchUpInside)
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    private func loadPage() {
-        request.loadPublicFiles(for: self)
+    private func loadPage(offset: Int) {
+        request.loadPublicFiles(for: self, offset: offset)
+    }
+    
+    @objc func loadButtonTapped() {
+        self.offset += 10
+        loadPage(offset: self.offset)
     }
     
     func updateData(_ items: [PublicFiles]) {
-        self.information = items
+        information.append(contentsOf: items)
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()
@@ -55,7 +66,7 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func refreshData() {
         information.removeAll()
-        loadPage()
+        loadPage(offset: 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

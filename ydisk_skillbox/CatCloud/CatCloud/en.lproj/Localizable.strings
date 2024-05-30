@@ -28,7 +28,7 @@
 "kb" = "KB";
 "ok" = "OK";
 "empty" = "Empty";
-"empty message" = "Folder is empty.";
+"emptyMessage" = "Folder is empty.";
 "loadMore" = "Load more";
 "detailTitle" = "Detail Information";
 "detailName" = "File name: ";
@@ -47,4 +47,5 @@
 "thirdName" = "Share";
 "thirdMessage" = "Share your files with others";
 "next" = "Next";
-"link" = "Ссылка";
+"link" = "Link";
+"loading" = "A file is being downloaded from the network...";
