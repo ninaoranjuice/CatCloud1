@@ -27,8 +27,18 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         tableView.register(CustomCell.self, forCellReuseIdentifier: "Cell")
         title = Constants.Text.Profile.publicButtonHeader
+        closeButton()
         setUI()
         loadPage(offset: offset)
+    }
+    
+    private func closeButton() {
+        let closeButton = UIBarButtonItem(title: Constants.Text.Profile.back, style: .plain, target: self, action: #selector(closeTapped))
+        navigationItem.leftBarButtonItem = closeButton
+    }
+    
+    @objc func closeTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
     private func setUI() {
@@ -161,8 +171,8 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let selectedFile = information[indexPath.row]
-            guard let publicKey = selectedFile.public_key, let path = selectedFile.path else {
-                print("Нет ключа публикации или пути для выбранного файла.")
+            guard let path = selectedFile.path else {
+                print("Нет пути для выбранного файла.")
                 return
             }
             request.unpublic(path: path) { [weak self] error in

@@ -39,6 +39,7 @@ class Constants {
             static let emptyMessage = Bundle.main.localizedString(forKey: "emptyMessage", value: "", table: "Localizable")
             static let ok = Bundle.main.localizedString(forKey: "ok", value: "", table: "Localizable")
             static let loadMore = Bundle.main.localizedString(forKey: "loadMore", value: "", table: "Localizable")
+            static let back = Bundle.main.localizedString(forKey: "back", value: "", table: "Localizable")
             
         }
         

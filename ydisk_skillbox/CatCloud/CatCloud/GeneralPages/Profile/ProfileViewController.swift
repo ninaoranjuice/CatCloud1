@@ -136,7 +136,8 @@ class ProfileViewController: UIViewController {
     
     @objc func tapPublic() {
         let publicFilesController = PublicFilesController()
-        present(publicFilesController, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: publicFilesController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     @objc func tapExit() {
