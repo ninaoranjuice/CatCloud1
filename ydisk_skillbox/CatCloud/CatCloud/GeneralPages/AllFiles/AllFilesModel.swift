@@ -27,11 +27,6 @@ struct Info: Codable {
     let href: String?
     let public_url: String?
     let type: String?
-
-
 }
 
-struct AllLoadFilesResponse: Codable {
-    let items: [Info]
-}
 

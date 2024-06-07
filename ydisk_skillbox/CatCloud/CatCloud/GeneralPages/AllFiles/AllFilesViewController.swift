@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import AlamofireImage
 
-class AllFilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AllFilesViewController: NetworkController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView = UITableView()
     var request = AllFilesRequests()
@@ -46,7 +46,35 @@ class AllFilesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadPage(offset: Int) {
-        request.loadAllFiles(for: self, offset: offset)
+        if NetworkMonitor.shared.isConnected {
+            loadDataFromNet()
+        } else {
+            loadCachedData()
+        }
+    }
+    
+    override func loadDataFromNet() {
+        request.loadAllFiles(offset: offset) { [weak self] (result: Result<[Info], Error>) in
+            switch result {
+            case .success (let items):
+                self?.updateData(items)
+                if let data = try? JSONEncoder().encode(items) {
+                    SaveInfo.shared.saveFile(data, fileName: "allFiles_offset_\(self?.offset ?? 0)")
+                }
+            case .failure(let error): print("Ошибка загрузки публичных файлов \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    override func loadCachedData() {
+        let cacheKey = "allFiles_offset_\(offset)"
+        if let cachedData = SaveInfo.shared.getFileData(fileName: cacheKey),
+           let items = try? JSONDecoder().decode([Info].self, from: cachedData) {
+            updateData(items)
+            print("Получены данные из кэша, успешно.")
+        } else {
+            print("Ошибка. Отсутствуют данные для данного запроса в кэше.")
+        }
     }
     
     @objc func loadButtonTapped() {

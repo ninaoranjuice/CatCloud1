@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 class AllFilesRequests {
-    func loadAllFiles(for viewController: AllFilesViewController, offset: Int) {
+    func loadAllFiles(offset: Int, completion: @escaping (Result<[Info], Error>) -> Void) {
         
         let urlString = "https://cloud-api.yandex.net/v1/disk/resources/files"
         
@@ -24,60 +24,20 @@ class AllFilesRequests {
             "sort": "name"
         ]
         
-        var urlComponents = URLComponents(string: urlString)!
-        urlComponents.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value as? String)
-        }
-        
-        guard let finalURL = urlComponents.url else {
-            print("Ошибка при создании ссылки.")
-            return
-        }
-        print(finalURL)
-        
-        var request = URLRequest(url: finalURL)
-        request.httpMethod = "GET"
-        
-        if let accessToken = TokenManager.shared.accessToken {
-            request.setValue("OAuth \(accessToken)", forHTTPHeaderField: "Authorization")
-        
-            print("Токен доступа успешно добавлен к запросу.")
-            print("Токен, который добавили: \(accessToken)")
-        } else {
-            print("Проблемы с авторизацией.")
-        }
-        
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Ошибка: \(error)")
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                guard let response = response as? HTTPURLResponse else {
-                    print("Не удалось получить HTTP-ответ")
+        AF.request(urlString, parameters: parameters, headers: HTTPHeaders(["Authorization": "OAuth \(TokenManager.shared.accessToken ?? "")"])).responseDecodable(of: AllFilesResponse.self) { response in
+            switch response.result {
+            case .success(let result):
+                guard let items = result.items else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Не найдено объектов."])))
                     return
                 }
-
-                print("Код состояния HTTP-ответа: \(response.statusCode)")
-                return
-            }
-            if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(AllLoadFilesResponse.self, from: data)
-                    DispatchQueue.main.async {
-                        viewController.updateData(result.items)
-                    }
-                }
-                catch {
-                    print ("Ошибка декодирования \(error)")
-                }
+                completion(.success(items))
+            case .failure(let error):
+                print("Ошибка \(error)")
             }
         }
-        task.resume()
     }
-    
+        
     func loadContentsOfFolder(path: String, for viewController: AllFilesViewController, completion: @escaping ([Info]?) -> Void) {
            let baseURL = "https://cloud-api.yandex.net/v1/disk/resources"
            
