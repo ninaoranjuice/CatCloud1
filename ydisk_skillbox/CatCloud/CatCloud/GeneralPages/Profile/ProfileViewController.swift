@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: NetworkController {
     
     var request = ProfileRequests()
     
@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
         title = Constants.Text.TapBarController.profile
         setUI()
         setConstraints()
+        setupNetworkMonitoring()
         loadInfo()
     }
     
@@ -108,15 +109,35 @@ class ProfileViewController: UIViewController {
     }
     
     private func loadInfo() {
-        request.loadInformation { result in
+        if !NetworkMonitor.shared.isConnected {
+            loadCachedData()
+        } else {
+            loadDataFromNet()
+        }
+    }
+    
+    override func loadDataFromNet() {
+        request.loadInformation { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let diagramma):
-                    self.updateUI(with: diagramma)
+                    self?.updateUI(with: diagramma)
+                    if let data = try? JSONEncoder().encode(diagramma) {
+                        SaveInfo.shared.saveFile(data, fileName: "profileData")
+                    }
                 case .failure(let error):
                     print("Ошибка загрузки данных: \(error)")
                 }
             }
+        }
+    }
+    
+    override func loadCachedData() {
+        if let data = SaveInfo.shared.getFileData(fileName: "profileData"),
+           let diagramma = try? JSONDecoder().decode(Diagramma.self, from: data) {
+            updateUI(with: diagramma)
+        } else {
+            print("Ошибка загрузки данных из кэша. ")
         }
     }
     
