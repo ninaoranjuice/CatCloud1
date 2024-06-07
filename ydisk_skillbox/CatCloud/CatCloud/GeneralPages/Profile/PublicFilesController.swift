@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import AlamofireImage
 
-class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PublicFilesController: NetworkController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView = UITableView()
     var request = PublicFilesRequests()
@@ -58,12 +58,40 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func loadPage(offset: Int) {
-        request.loadPublicFiles(for: self, offset: offset)
+        if NetworkMonitor.shared.isConnected {
+            loadDataFromNet()
+        } else {
+            loadCachedData()
+        }
     }
     
     @objc func loadButtonTapped() {
         self.offset += 10
         loadPage(offset: self.offset)
+    }
+    
+    override func loadDataFromNet() {
+        request.loadPublicFiles(offset: offset) { [weak self] (result: Result<[PublicFiles], Error>) in
+            switch result {
+            case .success (let items):
+                self?.updateData(items)
+                if let data = try? JSONEncoder().encode(items) {
+                    SaveInfo.shared.saveFile(data, fileName: "publicFiles_offset_\(self?.offset ?? 0)")
+                }
+            case .failure(let error): print("Ошибка загрузки публичных файлов \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    override func loadCachedData() {
+        let cacheKey = "publicFiles_offset_\(offset)"
+        if let cachedData = SaveInfo.shared.getFileData(fileName: cacheKey),
+           let items = try? JSONDecoder().decode([PublicFiles].self, from: cachedData) {
+            updateData(items)
+            print("Получены данные из кэша, успешно.")
+        } else {
+            print("Ошибка. Отсутствуют данные для данного запроса в кэше.")
+        }
     }
     
     func updateData(_ items: [PublicFiles]) {

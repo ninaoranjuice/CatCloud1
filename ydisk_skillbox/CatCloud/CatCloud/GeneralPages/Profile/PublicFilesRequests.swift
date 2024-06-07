@@ -11,7 +11,7 @@ import Alamofire
 
 class PublicFilesRequests {
     
-    func loadPublicFiles(for viewController: PublicFilesController, offset: Int) {
+    func loadPublicFiles(offset: Int, completion: @escaping (Result<[PublicFiles], Error>) -> Void) {
         let baseURL = "https://cloud-api.yandex.net/v1/disk/resources/public"
         let limit = "10"
         let fields = "preview, name, created, size, mime_type"
@@ -28,13 +28,10 @@ class PublicFilesRequests {
             switch response.result {
             case .success(let result):
                 guard let items = result.items else {
-                    print(response)
-                    print("Не найдено объектов вообще.")
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Не найдено объектов."])))
                     return
                 }
-                DispatchQueue.main.async {
-                    viewController.updateData(items)
-                }
+                completion(.success(items))
             case .failure(let error):
                 print("Ошибка \(error)")
             }
