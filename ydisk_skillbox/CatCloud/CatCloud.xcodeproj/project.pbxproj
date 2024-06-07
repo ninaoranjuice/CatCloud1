@@ -43,6 +43,8 @@
 		2CBF68572C08DD2C00BA4AAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF68552C08DD2C00BA4AAB /* Localizable.strings */; };
 		2CBF685C2C08DE5A00BA4AAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF685B2C08DE5A00BA4AAB /* Constants.swift */; };
 		2CBF685E2C0925FA00BA4AAB /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF685D2C0925FA00BA4AAB /* Loading.swift */; };
+		2CBF68682C139DF500BA4AAB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF68672C139DF500BA4AAB /* Network.swift */; };
+		2CBF686A2C13A36600BA4AAB /* NetworkConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF68692C13A36600BA4AAB /* NetworkConroller.swift */; };
 		2CFBA2AC2BBCA25A00C43A48 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */; };
 		2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */; };
 		A8582708AFE13DBEFAFB3BC1 /* Pods_CatCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DA9DC913709ECF99493F77 /* Pods_CatCloud.framework */; };
@@ -91,6 +93,8 @@
 		2CBF685A2C08DD6C00BA4AAB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2CBF685B2C08DE5A00BA4AAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2CBF685D2C0925FA00BA4AAB /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		2CBF68672C139DF500BA4AAB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		2CBF68692C13A36600BA4AAB /* NetworkConroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConroller.swift; sourceTree = "<group>"; };
 		2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75C16E25858ED5D7CACE5D8F /* Pods-CatCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatCloud.debug.xcconfig"; path = "Target Support Files/Pods-CatCloud/Pods-CatCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,8 +203,6 @@
 				2C7DF2D12BE1384300DC1F68 /* DetailViewController.swift */,
 				2C7DF2D42BE1386800DC1F68 /* DetailViewModel.swift */,
 				2C7DF2D62BE1387300DC1F68 /* DetailViewRequest.swift */,
-				2C9C741F2BEE2F3000809995 /* SaveInfo.swift */,
-				2C7B945F2BF113F500A6272E /* File.xcdatamodeld */,
 			);
 			path = DetailInformation;
 			sourceTree = "<group>";
@@ -243,6 +245,10 @@
 				2C7DF2CA2BDBF2F200DC1F68 /* AllFiles */,
 				2C5BB8A12BD058EA00F767D1 /* TapBarController.swift */,
 				2C7DF2D32BE1384E00DC1F68 /* DetailInformation */,
+				2CBF68672C139DF500BA4AAB /* Network.swift */,
+				2C7B945F2BF113F500A6272E /* File.xcdatamodeld */,
+				2C9C741F2BEE2F3000809995 /* SaveInfo.swift */,
+				2CBF68692C13A36600BA4AAB /* NetworkConroller.swift */,
 			);
 			path = GeneralPages;
 			sourceTree = "<group>";
@@ -388,6 +394,7 @@
 				2CFBA2AC2BBCA25A00C43A48 /* RegistrationViewController.swift in Sources */,
 				2C1161292BBAFECC0080215C /* OnboardingViewController.swift in Sources */,
 				2C7DF2D52BE1386800DC1F68 /* DetailViewModel.swift in Sources */,
+				2CBF68682C139DF500BA4AAB /* Network.swift in Sources */,
 				2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */,
 				2CBF685E2C0925FA00BA4AAB /* Loading.swift in Sources */,
 				2CA28E292BD15D2D004DC585 /* LastFilesRequests.swift in Sources */,
@@ -409,6 +416,7 @@
 				2C5FEF412BF6222300B881F8 /* ShareElement.swift in Sources */,
 				2C3758872BFF546B0092DFF0 /* PublicFilesModel.swift in Sources */,
 				2C11612B2BBB044F0080215C /* OnboardingModel.swift in Sources */,
+				2CBF686A2C13A36600BA4AAB /* NetworkConroller.swift in Sources */,
 				2C5FEF442BF795B500B881F8 /* PofileRequests.swift in Sources */,
 				2C3758852BFF54370092DFF0 /* PublicFilesRequests.swift in Sources */,
 				2C9C74202BEE2F3000809995 /* SaveInfo.swift in Sources */,
@@ -676,8 +684,7 @@
 				2C7B94602BF113F500A6272E /* File.xcdatamodel */,
 			);
 			currentVersion = 2C7B94602BF113F500A6272E /* File.xcdatamodel */;
-			name = File.xcdatamodeld;
-			path = /Users/ninagurstieva/Desktop/HOMEWORK_SKILLBOX/diplom_iOS_lvl1/ydisk_skillbox/CatCloud/CatCloud/GeneralPages/DetailInformation/File.xcdatamodeld;
+			path = File.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

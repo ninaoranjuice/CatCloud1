@@ -93,5 +93,23 @@ class SaveInfo {
             print("Ошибка удаления файлов: \(error.localizedDescription)")
         }
     }
+    
+    func getAllFiles() -> [Data] {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "File")
+        do {
+            let result = try context.fetch(fetchRequest)
+            var filesData: [Data] = []
+            for case let file as NSManagedObject in result {
+                if let data = file.value(forKey: "data") as? Data {
+                    filesData.append(data)
+                }
+            }
+            return filesData
+        } catch {
+            print("Ошибка чтения данных из Базы Данных \(error.localizedDescription)")
+            return []
+        }
+    }
 }
   
