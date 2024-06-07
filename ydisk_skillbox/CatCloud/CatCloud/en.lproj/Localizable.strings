@@ -50,3 +50,4 @@
 "link" = "Link";
 "loading" = "A file is being downloaded from the network...";
 "back" = "Back";
+"noNetwork" = "Sorry, network crash.";

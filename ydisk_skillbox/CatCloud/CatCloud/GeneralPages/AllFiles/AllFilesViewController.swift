@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import AlamofireImage
+import Toast_Swift
+
 
 class AllFilesViewController: NetworkController, UITableViewDelegate, UITableViewDataSource {
     
@@ -46,10 +48,11 @@ class AllFilesViewController: NetworkController, UITableViewDelegate, UITableVie
     }
     
     private func loadPage(offset: Int) {
-        if NetworkMonitor.shared.isConnected {
-            loadDataFromNet()
-        } else {
+        if !NetworkMonitor.shared.isConnected {
+            self.view.makeToast(Constants.Text.Elements.noNetwork)
             loadCachedData()
+        } else {
+            loadDataFromNet()
         }
     }
     

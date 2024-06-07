@@ -8,6 +8,7 @@ pod 'SnapKit', '~> 5.0.1'
 pod 'Alamofire'
 pod 'AlamofireImage', '~> 4.1'
 pod 'SwiftLint', '~> 0.54'
+pod 'Toast-Swift', '~> 5.0.1'
 
   # Pods for CatCloud
 

@@ -69,6 +69,7 @@ class Constants {
         enum Elements {
             static let link = Bundle.main.localizedString(forKey: "link", value: "", table: "Localizable")
             static let loading = Bundle.main.localizedString(forKey: "loading", value: "", table: "Localizable")
+            static let noNetwork = Bundle.main.localizedString(forKey: "noNetwork", value: "", table: "Localizable")
         }
     }
 }

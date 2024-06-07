@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Toast_Swift
 
 class ProfileViewController: NetworkController {
     
@@ -110,6 +111,7 @@ class ProfileViewController: NetworkController {
     
     private func loadInfo() {
         if !NetworkMonitor.shared.isConnected {
+            self.view.makeToast(Constants.Text.Elements.noNetwork)
             loadCachedData()
         } else {
             loadDataFromNet()
