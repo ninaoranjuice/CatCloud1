@@ -26,7 +26,7 @@ class ShareElement: UIView {
         addSubview(linkLabel)
         addSubview(copyButton)
         
-        backgroundColor = .systemPink
+        backgroundColor = Constants.Colors.pink
         
         linkLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)

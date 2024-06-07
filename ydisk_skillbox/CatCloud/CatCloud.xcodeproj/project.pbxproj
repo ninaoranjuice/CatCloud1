@@ -45,6 +45,7 @@
 		2CBF685E2C0925FA00BA4AAB /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF685D2C0925FA00BA4AAB /* Loading.swift */; };
 		2CBF68682C139DF500BA4AAB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF68672C139DF500BA4AAB /* Network.swift */; };
 		2CBF686A2C13A36600BA4AAB /* NetworkConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF68692C13A36600BA4AAB /* NetworkConroller.swift */; };
+		2CBF686E2C13CB7A00BA4AAB /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF686D2C13CB7A00BA4AAB /* ColorExtension.swift */; };
 		2CFBA2AC2BBCA25A00C43A48 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */; };
 		2CFBA2B62BBCB72500C43A48 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */; };
 		A8582708AFE13DBEFAFB3BC1 /* Pods_CatCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DA9DC913709ECF99493F77 /* Pods_CatCloud.framework */; };
@@ -95,6 +96,7 @@
 		2CBF685D2C0925FA00BA4AAB /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		2CBF68672C139DF500BA4AAB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2CBF68692C13A36600BA4AAB /* NetworkConroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConroller.swift; sourceTree = "<group>"; };
+		2CBF686D2C13CB7A00BA4AAB /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		2CFBA2AB2BBCA25A00C43A48 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CFBA2B42BBCB72500C43A48 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75C16E25858ED5D7CACE5D8F /* Pods-CatCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatCloud.debug.xcconfig"; path = "Target Support Files/Pods-CatCloud/Pods-CatCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				2C5537082BD71291004DC0BE /* Assets.xcassets */,
 				2CBF68552C08DD2C00BA4AAB /* Localizable.strings */,
 				2CBF685B2C08DE5A00BA4AAB /* Constants.swift */,
+				2CBF686D2C13CB7A00BA4AAB /* ColorExtension.swift */,
 			);
 			path = CatCloud;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				2C11612D2BBB04890080215C /* PageView.swift in Sources */,
 				2C5BB89E2BD0581E00F767D1 /* LastFilesViewController.swift in Sources */,
 				2C5FEF462BF7A0EE00B881F8 /* ProfileModel.swift in Sources */,
+				2CBF686E2C13CB7A00BA4AAB /* ColorExtension.swift in Sources */,
 				2C7DF2D22BE1384300DC1F68 /* DetailViewController.swift in Sources */,
 				2C5BB8A62BD0692700F767D1 /* TokenManager.swift in Sources */,
 				2C7DF2CE2BDBF38100DC1F68 /* AllFilesModel.swift in Sources */,

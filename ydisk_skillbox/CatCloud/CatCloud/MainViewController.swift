@@ -25,13 +25,14 @@ class MainViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .white
 
-        text.textColor = .blue
+        text.textColor = Constants.Colors.button
         text.text = Constants.Text.MainViewController.name
         text.font = .boldSystemFont(ofSize: 40)
 
         image.contentMode = .scaleAspectFit
         
         registrationButton.setTitle(Constants.Text.MainViewController.login, for: .normal)
+        registrationButton.setTitleColor(Constants.Colors.button, for: .normal)
         registrationButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         stackView.axis = .vertical

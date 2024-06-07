@@ -73,7 +73,7 @@ class AllFilesRequests {
                         completion(embeddedItems)
                     } else {
                         print("Есть проблемы с запросом папки... ")
-                        print("Вложно \(String(describing: result.embedded))")
+                        print("Вложено \(String(describing: result.embedded))")
                         completion(nil)
                     }
                 case .failure(let error):

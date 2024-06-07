@@ -43,14 +43,14 @@ class PageView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        titleLabel.textColor = Constants.Colors.logo
+        titleLabel.font = UIFont.systemFont(ofSize: 32)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         
-        descriptionLabel.textColor = .darkGray
+        descriptionLabel.textColor = .black 
         descriptionLabel.font = UIFont.systemFont(ofSize: 24)
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
@@ -58,9 +58,9 @@ class PageView: UIView {
         addSubview(descriptionLabel)
         
         nextButton.setTitle(Constants.Text.Onboarding.next, for: .normal)
-        nextButton.setTitleColor(.blue, for: .normal)
+        nextButton.setTitleColor(Constants.Colors.logo, for: .normal)
         nextButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        nextButton.backgroundColor = .lightGray
+        nextButton.backgroundColor = Constants.Colors.pink
         nextButton.layer.cornerRadius = 25
         nextButton.layer.masksToBounds = true
         addSubview(nextButton)

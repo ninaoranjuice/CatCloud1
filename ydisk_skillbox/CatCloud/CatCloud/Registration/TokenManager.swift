@@ -25,7 +25,7 @@ class TokenManager {
     func clearToken() {
         DispatchQueue.main.async {
             self.userDefaults.removeObject(forKey: self.tokenKey)
-            print("Токен очищен: \(self.accessToken)")
+            print("Токен очищен: \(String(describing: self.accessToken))")
         }
     }
 }

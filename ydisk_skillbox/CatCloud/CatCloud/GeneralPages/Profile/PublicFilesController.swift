@@ -52,6 +52,7 @@ class PublicFilesController: NetworkController, UITableViewDelegate, UITableView
         
         tableView.tableFooterView = loadButton
         loadButton.setTitle(Constants.Text.Profile.loadMore, for: .normal)
+        loadButton.setTitleColor(Constants.Colors.button, for: .normal)
         loadButton.addTarget(self, action: #selector(loadButtonTapped), for: .touchUpInside)
         
         tableView.snp.makeConstraints { make in
@@ -81,7 +82,7 @@ class PublicFilesController: NetworkController, UITableViewDelegate, UITableView
                 if let data = try? JSONEncoder().encode(items) {
                     SaveInfo.shared.saveFile(data, fileName: "publicFiles_offset_\(self?.offset ?? 0)")
                 }
-            case .failure(let error): print("Ошибка загрузки публичных файлов \(error.localizedDescription)")
+            case .failure(let error): print("Ошибка загрузки опубликованных файлов \(error.localizedDescription)")
             }
         }
     }
@@ -166,7 +167,7 @@ class PublicFilesController: NetworkController, UITableViewDelegate, UITableView
         
         if selectedFile.type == "dir" {
             guard let publicKey = selectedFile.public_key, let path = selectedFile.path else {
-                print("НЕТ КЛЮЧА публикации или пути для выбранной папки.")
+                print("Нет ключа для публикации или пути для выбранной папки.")
                 return
             }
             request.loadContentsOfFolder(publicKey: publicKey, path: path, for: self) { [weak self] items in

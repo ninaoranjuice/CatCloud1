@@ -76,7 +76,7 @@ class PublicFilesRequests {
         AF.request(request).responseDecodable(of: PublicFilesResponse.self) { response in
             switch response.result {
             case .success(let result):
-                print("РЕЗУЛЬТАТ ЗАПРОСА! \(result)")
+                print("Посмотреть результат запроса: \(result)")
                 if let embeddedItems = result.embedded?.items {
                     DispatchQueue.main.async {
                         viewController.information = embeddedItems
@@ -85,7 +85,7 @@ class PublicFilesRequests {
                     completion(embeddedItems)
                 } else {
                     print("Есть проблемы с запросом папки... ")
-                    print("Вложно \(String(describing: result.embedded))")
+                    print("Содержимое: \(String(describing: result.embedded))")
                     completion(nil)
                 }
             case .failure(let error):

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class Constants {
@@ -59,7 +60,7 @@ class Constants {
         enum Onboarding {
             static let firstName = Bundle.main.localizedString(forKey: "firstName", value: "", table: "Localizable")
             static let firstMessage = Bundle.main.localizedString(forKey: "firstMessage", value: "", table: "Localizable")
-            static let secondName = Bundle.main.localizedString(forKey: "firstName", value: "", table: "Localizable")
+            static let secondName = Bundle.main.localizedString(forKey: "secondName", value: "", table: "Localizable")
             static let secondMessage = Bundle.main.localizedString(forKey: "secondMessage", value: "", table: "Localizable")
             static let thirdName = Bundle.main.localizedString(forKey: "thirdName", value: "", table: "Localizable")
             static let thirdMessage = Bundle.main.localizedString(forKey: "thirdMessage", value: "", table: "Localizable")
@@ -71,5 +72,14 @@ class Constants {
             static let loading = Bundle.main.localizedString(forKey: "loading", value: "", table: "Localizable")
             static let noNetwork = Bundle.main.localizedString(forKey: "noNetwork", value: "", table: "Localizable")
         }
+    }
+    
+    enum Colors {
+        static let background = UIColor(hex: "#A9C7E5")
+        static let logo = UIColor(hex: "#223A76")
+        static let button = UIColor(hex: "#5C8DC6")
+        static let blue = UIColor(hex: "#98C3E5")
+        static let pink = UIColor(hex: "#E498E5")
+        static let green = UIColor(hex: "#98E5C8")
     }
 }

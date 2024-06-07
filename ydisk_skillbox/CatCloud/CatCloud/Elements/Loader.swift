@@ -10,7 +10,7 @@ import UIKit
 class Loader: UIActivityIndicatorView {
     override init(style: UIActivityIndicatorView.Style) {
         super.init(style: style)
-        color = .red
+        color = Constants.Colors.logo
     }
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

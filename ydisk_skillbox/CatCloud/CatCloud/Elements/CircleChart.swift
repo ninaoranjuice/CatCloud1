@@ -11,8 +11,8 @@ class CircleChart: UIView {
 
     private let lineWidth: CGFloat = 20.0
 
-    var usedMemoryColor: UIColor = .systemBlue
-    var freeMemoryColor: UIColor = .systemPink
+    var usedMemoryColor: UIColor = Constants.Colors.blue
+    var freeMemoryColor: UIColor = Constants.Colors.pink
 
     private var progressLayer: CAShapeLayer!
     private var freeMemoryLayer: CAShapeLayer!
@@ -35,7 +35,6 @@ class CircleChart: UIView {
 
         let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
 
-        // Создаем слой для занятой памяти
         progressLayer = CAShapeLayer()
         progressLayer.path = circlePath.cgPath
         progressLayer.lineWidth = lineWidth
@@ -44,7 +43,6 @@ class CircleChart: UIView {
         progressLayer.strokeEnd = 0
         layer.addSublayer(progressLayer)
 
-        // Создаем слой для свободной памяти
         freeMemoryLayer = CAShapeLayer()
         freeMemoryLayer.path = circlePath.cgPath
         freeMemoryLayer.lineWidth = lineWidth

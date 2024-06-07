@@ -37,30 +37,30 @@ class ProfileViewController: NetworkController {
         
         freeMemory.text = Constants.Text.Profile.freeMemory
         freeMemory.font = UIFont(name: "abosanova", size: 24)
-        freeMemory.textColor = .systemPink
+        freeMemory.textColor = Constants.Colors.pink
         
         occupiedMemory.text = Constants.Text.Profile.usedMemory
         occupiedMemory.font = UIFont(name: "abosanova", size: 24)
-        occupiedMemory.textColor = .systemBlue
+        occupiedMemory.textColor = Constants.Colors.blue
         
         allMemory.text = "0"
         allMemory.font = UIFont(name: "abosanova", size: 24)
-        allMemory.textColor = .green
+        allMemory.textColor = Constants.Colors.green
         
         publicButton.setTitle(Constants.Text.Profile.publicButtonHeader, for: .normal)
-        publicButton.setTitleColor(.black, for: .normal)
+        publicButton.setTitleColor(Constants.Colors.button, for: .normal)
         publicButton.titleLabel?.font = UIFont(name: "abosanova", size: 24)
         publicButton.layer.borderWidth = 2.0
-        publicButton.layer.borderColor = UIColor.black.cgColor
+        publicButton.layer.borderColor = Constants.Colors.button.cgColor
         publicButton.backgroundColor = UIColor.clear
         publicButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         publicButton.addTarget(self, action: #selector(tapPublic), for: .touchUpInside)
         
         exitButton.setTitle(Constants.Text.Profile.exitButtonHeader, for: .normal)
         exitButton.titleLabel?.font = UIFont(name: "abosanova", size: 24)
-        exitButton.setTitleColor(.black, for: .normal)
+        exitButton.setTitleColor(Constants.Colors.button, for: .normal)
         exitButton.layer.borderWidth = 2.0
-        exitButton.layer.borderColor = UIColor.black.cgColor
+        exitButton.layer.borderColor = Constants.Colors.button.cgColor
         exitButton.backgroundColor = UIColor.clear
         exitButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         exitButton.addTarget(self, action: #selector(tapExit), for: .touchUpInside)

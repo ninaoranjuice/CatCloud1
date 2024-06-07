@@ -29,8 +29,11 @@ class CustomCell: UITableViewCell {
         contentView.addSubview(loader)
         
         nameLabel.font = UIFont(name: "abosanova", size: 20)
+        nameLabel.textColor = Constants.Colors.button
         createdLabel.font = UIFont(name: "abosanova", size: 20)
+        createdLabel.textColor = Constants.Colors.button
         sizeLabel.font = UIFont(name: "abosanova", size: 20)
+        sizeLabel.textColor = Constants.Colors.button
         
         loader.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
