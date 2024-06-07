@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import AlamofireImage
 
-class LastFilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LastFilesViewController: NetworkController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView = UITableView()
     var request = LastFilesRequests()
@@ -41,7 +41,35 @@ class LastFilesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private func loadPage() {
-        request.loadLastFiles(for: self)
+        if NetworkMonitor.shared.isConnected {
+            loadDataFromNet()
+        } else {
+            loadCachedData()
+        }
+    }
+    
+    override func loadDataFromNet() {
+        request.loadLastFiles { [weak self] (result: Result<[Information], Error>) in
+            switch result {
+            case .success (let items):
+                self?.updateData(items)
+                if let data = try? JSONEncoder().encode(items) {
+                    SaveInfo.shared.saveFile(data, fileName: "lastFiles")
+                }
+            case .failure(let error): print("Ошибка загрузки последних файлов \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    override func loadCachedData() {
+        let cacheKey = "lastFiles"
+        if let cachedData = SaveInfo.shared.getFileData(fileName: cacheKey),
+           let items = try? JSONDecoder().decode([Information].self, from: cachedData) {
+            updateData(items)
+            print("Получены данные из кэша, успешно.")
+        } else {
+            print("Ошибка. Отсутствуют данные для данного запроса в кэше.")
+        }
     }
     
     func updateData(_ informationArray: [Information]) {

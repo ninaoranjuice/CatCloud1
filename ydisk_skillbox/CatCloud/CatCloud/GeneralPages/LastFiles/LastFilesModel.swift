@@ -19,5 +19,5 @@ struct Information: Codable {
 }
 
 struct LastUploadFilesResponse: Codable {
-    let items: [Information]
+    let items: [Information]?
 }
