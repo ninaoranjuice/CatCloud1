@@ -67,7 +67,9 @@ class PublicFilesController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func updateData(_ items: [PublicFiles]) {
+        print("Количество элементов в массиве information до обновления: \(information.count)")
         information.append(contentsOf: items)
+        print("Количество элементов в массиве information после обновления: \(information.count)")
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.refreshControl.endRefreshing()

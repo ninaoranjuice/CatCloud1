@@ -81,6 +81,10 @@ class PublicFilesRequests {
             case .success(let result):
                 print("РЕЗУЛЬТАТ ЗАПРОСА! \(result)")
                 if let embeddedItems = result.embedded?.items {
+                    DispatchQueue.main.async {
+                        viewController.information = embeddedItems
+                        viewController.tableView.reloadData()
+                    }
                     completion(embeddedItems)
                 } else {
                     print("Есть проблемы с запросом папки... ")
